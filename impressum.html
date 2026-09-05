@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum — Mineralienfreunde Bernau</title>
+<meta name="description" content="Impressum der Mineralienfreunde Bernau, Bezirksgruppe der VFMG e.V.">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2E0F1C;
+    --paper:#EFDFB8;
+    --text-on-dark:#EFDFB8;
+    --text-on-dark-dim:#C7A98A;
+    --text-on-paper:#2E0F1C;
+    --text-on-paper-dim:#3B1626;
+    --gold:#B9873D;
+    --line:rgba(185,135,61,0.20);
+    --line-strong:rgba(185,135,61,0.38);
+    --font-display:'Fraunces', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--ink); color:var(--text-on-dark); font-family:var(--font-body); font-size:16px; line-height:1.7; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--gold); } img,svg{ display:block; max-width:100%; }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+  h1,h2{ font-family:var(--font-display); font-weight:600; margin:0; }
+  p{ margin:0 0 16px; }
+  ul{ margin:0 0 16px; padding-left:22px; }
+  li{ margin-bottom:6px; }
+
+  header{ position:sticky; top:0; z-index:50; background:rgba(23,24,27,0.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; gap:20px; }
+  .brand{ display:flex; align-items:baseline; gap:10px; text-decoration:none; color:var(--text-on-dark); }
+  .brand .mark{ font-family:var(--font-display); font-size:22px; font-weight:700; }
+  .brand .sub{ font-family:var(--font-mono); font-size:11px; color:var(--text-on-dark-dim); }
+  .back-link{ font-size:14.5px; color:var(--text-on-dark-dim); text-decoration:none; border-bottom:1px solid transparent; padding-bottom:2px; transition:all .15s ease; }
+  .back-link:hover{ color:var(--text-on-dark); border-color:var(--line-strong); }
+
+  .hero{ padding:64px 0 40px; border-bottom:1px solid var(--line); }
+  .hero .eyebrow{ font-family:var(--font-mono); font-size:12px; color:var(--gold); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:14px; }
+  .hero h1{ font-size:clamp(32px,4.6vw,46px); line-height:1.08; margin-bottom:14px; }
+  .hero p{ font-size:15.5px; color:var(--text-on-dark-dim); }
+
+  main{ padding:56px 0 80px; }
+
+  .note-box{
+    background:var(--paper);
+    color:var(--text-on-paper);
+    padding:20px 24px;
+    margin:0 0 44px;
+    clip-path:polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+    font-size:14.5px;
+    line-height:1.6;
+  }
+  .placeholder{ background:rgba(185,135,61,0.32); color:var(--text-on-dark); padding:1px 6px; border-radius:2px; }
+  .note-box .placeholder{ background:rgba(32,29,22,0.1); color:var(--text-on-paper); }
+
+  section + section{ margin-top:44px; padding-top:44px; border-top:1px solid var(--line); }
+  h2{ font-size:22px; margin-bottom:16px; }
+
+
+  footer{ border-top:1px solid var(--line); padding:34px 0; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+  .foot-row .brand-line{ font-size:14px; color:var(--text-on-dark-dim); }
+  .foot-row .brand-line strong{ color:var(--text-on-dark); }
+  footer .fine{ font-size:12.5px; color:var(--text-on-dark-dim); font-family:var(--font-mono); }
+  footer a{ color:inherit; }
+
+  .back-to-top{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#2E0F1C;
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:19px;
+    line-height:1;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(8px);
+    transition:opacity .2s ease, transform .2s ease, visibility .2s ease, background .15s ease;
+    z-index:80;
+  }
+  .back-to-top.visible{ opacity:1; visibility:visible; transform:translateY(0); }
+  .back-to-top:hover{ background:#D6AC64; }
+  @media (min-width:861px){
+    .back-to-top{
+      width:66px;
+      height:66px;
+      right:28px;
+      bottom:28px;
+      font-size:28px;
+    }
+  }
+
+  .menu-wrap{ position:relative; display:flex; align-items:center; }
+  .menu-toggle{
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:border-color .15s ease;
+    flex-shrink:0;
+  }
+  .menu-toggle:hover{ border-color:var(--gold); }
+  .menu-toggle svg{ width:16px; height:16px; display:block; }
+  .menu-toggle svg line{ stroke:var(--text-on-dark-dim); stroke-width:1.6; transition:stroke .15s ease; }
+  .menu-toggle:hover svg line{ stroke:var(--gold); }
+  .menu-panel{
+    position:absolute;
+    top:calc(100% + 10px);
+    right:0;
+    min-width:230px;
+    background:var(--paper);
+    color:var(--text-on-paper);
+    padding:18px 22px;
+    clip-path:polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+    display:none;
+    flex-direction:column;
+    gap:9px;
+    box-shadow:0 14px 32px rgba(0,0,0,0.4);
+    z-index:90;
+  }
+  .menu-panel.open{ display:flex; }
+  .menu-panel .mlabel{
+    font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--text-on-paper-dim); margin-bottom:4px;
+  }
+  .menu-panel a{ color:var(--text-on-paper); text-decoration:none; font-size:14px; border-bottom:1px solid transparent; padding-bottom:1px; }
+  .menu-panel a:hover{ border-color:var(--text-on-paper-dim); }
+
+  .nav-right{ display:flex; align-items:center; gap:28px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <span class="mark">Mineralienfreunde Bernau</span>
+      <span class="sub">Bezirksgruppe der VFMG e.V.</span>
+    </a>
+    <div class="nav-right">
+    <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+    <div class="menu-wrap">
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menuPanel" aria-label="Weitere Seiten öffnen">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <nav class="menu-panel" id="menuPanel" aria-label="Weitere Seiten">
+    <a href="index.html#ueber-uns">Über uns</a>
+    <a href="chronik.html">Chronik</a>
+    <a href="index.html#aktivitaeten">Aktivitäten</a>
+    <a href="jahresprogramm.html">Jahresprogramm</a>
+    <a href="index.html#sammlung">Sammlung</a>
+    <a href="literaturempfehlungen.html">Literaturempfehlungen</a>
+    <a href="index.html#kontakt">Kontakt</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="login.html">Login</a>
+    </nav>
+  </div>
+  </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Rechtliches</span>
+    <h1>Impressum</h1>
+    <p>Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG). Für die Datenschutzerklärung siehe die <a href="datenschutz.html">separate Seite</a>.</p>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <div class="note-box">
+    Diese Seite enthält an mehreren Stellen <span class="placeholder">gelb markierte Platzhalter</span>. Bitte vor Veröffentlichung durch die tatsächlichen Angaben ersetzen und im Zweifel von einer sachkundigen Stelle (z. B. dem VFMG-Vorstand oder einer Rechtsberatung) prüfen lassen — dieser Text ist eine Vorlage, keine Rechtsberatung.
+  </div>
+
+  <section>
+    <p>
+      <span class="placeholder">Vereinigung der Freunde der Mineralogie und Geologie e.V. (VFMG)</span><br>
+      Bezirksgruppe Bernau<br>
+      <span class="placeholder">Straße Hausnummer</span><br>
+      <span class="placeholder">PLZ Ort</span>
+    </p>
+
+    <p><strong>Vertreten durch:</strong><br>
+    <span class="placeholder">Name der/des Vorsitzenden bzw. gesetzlichen Vertreters/Vertreterin gemäß Satzung</span></p>
+
+    <p><strong>Kontakt:</strong><br>
+    E-Mail: <a href="mailto:bg.bernau-b-berlin@vfmg.de">bg.bernau-b-berlin@vfmg.de</a><br>
+    Telefon: <span class="placeholder">optional, aber empfohlen</span></p>
+
+    <p><strong>Registereintrag:</strong><br>
+    Die VFMG e.V. ist im Vereinsregister eingetragen.<br>
+    Registergericht: <span class="placeholder">z. B. Amtsgericht Heidelberg</span><br>
+    Registernummer: <span class="placeholder">VR-Nummer</span></p>
+
+    <p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 Medienstaatsvertrag (MStV):</strong><br>
+    <span class="placeholder">Name, Anschrift wie oben</span></p>
+
+    <p style="color:var(--text-on-dark-dim); font-size:14px; margin-top:32px;">Stand: <span class="placeholder">Datum einfügen</span></p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+    <div class="brand-line">&copy; <span id="copyYear">2026</span> <strong>Mineralienfreunde Bernau</strong> – Bezirksgruppe Bernau der VFMG e.V.</div>
+    <div class="fine">bg.bernau-b-berlin@vfmg.de · <a href="https://vfmg.de/bezirksgruppen/bezirksgruppen-in-brandenburg">vfmg.de</a> · <a href="datenschutz.html">Datenschutz</a></div>
+    </div>
+  </div>
+</footer>
+
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Nach oben springen">&uarr;</button>
+
+<script>
+  (function(){
+    var btn = document.getElementById('backToTop');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+      btn.classList.toggle('visible', window.scrollY > 400);
+    });
+    btn.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    var el = document.getElementById('copyYear');
+    if(el){ el.textContent = new Date().getFullYear(); }
+  })();
+</script>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var panel = document.getElementById('menuPanel');
+    if(!toggle || !panel) return;
+    toggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = panel.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    document.addEventListener('click', function(e){
+      if(!panel.contains(e.target) && !toggle.contains(e.target)){
+        panel.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){
+        panel.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
+</body>
+</html>
