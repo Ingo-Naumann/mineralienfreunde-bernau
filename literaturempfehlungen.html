@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Literaturempfehlungen — Mineralienfreunde Bernau</title>
 <meta name="description" content="Literaturempfehlungen der Mineralienfreunde Bernau: Fachzeitschriften, das eigene Vereinsbuch und weiterführende Veröffentlichungen rund um Mineralien, Gesteine und Fossilien.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -35,7 +36,7 @@
   body{ margin:0; background:var(--ink); color:var(--text-on-dark); font-family:var(--font-body); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
   a{ color:inherit; } img,svg{ display:block; max-width:100%; }
   :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
-  .wrap{ max-width:900px; margin:0 auto; padding:0 28px; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
   h1,h2,h3{ font-family:var(--font-display); font-weight:600; margin:0; letter-spacing:-0.01em; }
   p{ margin:0; }
 
@@ -56,13 +57,11 @@
 
   .lit-item{
     display:grid;
-    grid-template-columns:120px 1fr;
+    grid-template-columns:150px 1fr;
     gap:26px;
-    padding:30px 0;
-    border-bottom:1px solid var(--line);
+    padding:15px 0;
   }
   .lit-item:first-child{ padding-top:0; }
-  .lit-item:last-child{ border-bottom:none; }
   .lit-tag{
     font-family:var(--font-mono);
     font-size:11px;
@@ -72,8 +71,11 @@
     color:#fff;
     display:inline-block;
     align-self:start;
+    margin-top:8px;
     text-align:center;
   }
+  .lit-tag-stack{ display:flex; flex-direction:column; align-items:flex-start; align-self:start; gap:4px; margin-top:8px; }
+  .lit-tag-stack .lit-tag{ margin-top:0; }
   .tag-buch{ background:var(--gold); color:#2E0F1C; }
   .tag-zeitschrift{ background:var(--azurite); }
   .tag-beitrag{ background:var(--malachite); }
@@ -81,9 +83,10 @@
   .cat-gesteine{ background:var(--malachite); }
   .cat-fossilien{ background:var(--cinnabar); }
   .cat-bearbeitung{ background:var(--amethyst); }
-  .lit-item h2,.lit-item h3{ font-size:19px; margin-bottom:6px; }
+  .lit-item h2,.lit-item h3{ font-size:19px; margin-bottom:-4px; }
+  .lit-item .subtitle{ display:block; font-size:14px; font-weight:400; color:inherit; margin:-4px 0 0; }
   .lit-item .byline{ font-family:var(--font-mono); font-size:12.5px; color:var(--gold); margin-bottom:10px; }
-  .lit-item p.desc{ font-size:15px; color:var(--text-on-dark-dim); margin-bottom:12px; max-width:60ch; }
+  .lit-item p.desc{ font-size:15px; color:var(--text-on-dark-dim); margin-bottom:12px; }
   .lit-item .link-line{
     font-family:var(--font-mono);
     font-size:12.5px;
@@ -98,26 +101,50 @@
     margin-bottom:8px;
   }
   .lit-item .isbn-pending em{ font-style:normal; opacity:.7; }
-  .lit-item .isbn-pending .verified{
+  .lit-item .isbn-pending .status{
     display:inline-block;
     margin-left:8px;
     font-family:var(--font-mono);
     font-size:10px;
     text-transform:uppercase;
     letter-spacing:.05em;
-    color:var(--malachite);
-    border:1px solid var(--malachite);
     padding:1px 6px;
   }
+  .status-buchhandel{ color:var(--malachite); border:1px solid var(--malachite); }
+  .status-gebraucht{ color:#C9A83C; border:1px solid #C9A83C; }
+  .status-vergriffen{ color:#C0392B; border:1px solid #C0392B; }
   .lit-item.hidden{ display:none; }
 
   .group-head{ margin:64px 0 8px; }
   .group-head .eyebrow{ font-family:var(--font-mono); font-size:12px; color:var(--gold); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:10px; }
   .group-head h2{ font-size:clamp(24px,3vw,30px); margin-bottom:8px; }
   .group-head p{ font-size:14.5px; color:var(--text-on-dark-dim); }
-  .group-head:first-of-type{ margin-top:56px; }
+  .group-head:first-of-type{ margin-top:20px; }
 
-  .filters{ display:flex; gap:10px; flex-wrap:wrap; margin:24px 0 8px; }
+  .filters{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:24px 0 8px; scroll-margin-top:90px; }
+  .filters .filter-label,.filters-fixed .filter-label{ font-family:var(--font-mono); font-size:12px; color:var(--text-on-dark-dim); text-transform:uppercase; letter-spacing:.05em; margin-right:2px; }
+
+  .filters-fixed{ display:none; }
+  @media (min-width:861px){
+    .filters-fixed{
+      display:flex;
+      position:fixed;
+      top:50%;
+      right:24px;
+      transform:translateY(-50%);
+      flex-direction:column;
+      align-items:flex-end;
+      gap:8px;
+      z-index:70;
+    }
+    .filters-fixed .filter-label{ margin:0 0 6px; }
+    .filters-fixed .filter-label,
+    .filters-fixed .filter-btn{
+      writing-mode:vertical-rl;
+      text-orientation:mixed;
+      padding:14px 7px;
+    }
+  }
   .filter-btn{
     font-family:var(--font-mono);
     font-size:12px;
@@ -131,6 +158,14 @@
   }
   .filter-btn:hover{ border-color:var(--line-strong); color:var(--text-on-dark); }
   .filter-btn.active{ background:var(--paper); color:var(--text-on-paper); border-color:var(--paper); }
+  .filter-btn[data-filter="mineralien"]{ border-color:var(--azurite); }
+  .filter-btn[data-filter="mineralien"].active{ background:var(--azurite); color:#fff; border-color:var(--azurite); }
+  .filter-btn[data-filter="gesteine"]{ border-color:var(--malachite); }
+  .filter-btn[data-filter="gesteine"].active{ background:var(--malachite); color:#fff; border-color:var(--malachite); }
+  .filter-btn[data-filter="fossilien"]{ border-color:var(--cinnabar); }
+  .filter-btn[data-filter="fossilien"].active{ background:var(--cinnabar); color:#fff; border-color:var(--cinnabar); }
+  .filter-btn[data-filter="bearbeitung"]{ border-color:var(--amethyst); }
+  .filter-btn[data-filter="bearbeitung"].active{ background:var(--amethyst); color:#fff; border-color:var(--amethyst); }
 
   .note-box{
     background:var(--paper);
@@ -145,7 +180,6 @@
 
 
   footer{ border-top:1px solid var(--line); padding:34px 0; }
-  footer .wrap{ max-width:1120px; }
   .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
   .foot-row .brand-line{ font-size:14px; color:var(--text-on-dark-dim); }
   .foot-row .brand-line strong{ color:var(--text-on-dark); }
@@ -264,38 +298,28 @@
 <section class="hero">
   <div class="wrap">
     <h1>Literaturempfehlungen</h1>
-    <p>Eine kleine Auswahl an Fachzeitschriften und Veröffentlichungen, mit denen wir selbst arbeiten — vom eigenen Vereinsbuch bis zu Beiträgen, die Mitglieder unserer Gruppe verfasst haben.</p>
+    <p>Eine kleine Auswahl an Fachzeitschriften und Veröffentlichungen, mit denen wir selbst arbeiten — vom eigenen Vereinsbuch bis zu Literatur, die unserer Ansicht nach besonders für Einsteiger geeignet ist.</p>
   </div>
 </section>
 
 <main class="wrap">
 
   <div class="lit-item">
-    <span class="lit-tag tag-buch">Buch</span>
+    <img src="buchcover.png" alt="Buchcover „Unser Hobby: Mineralien, Gesteine und Fossilien“" style="width:120px; height:auto; align-self:start;">
     <div>
-      <h2>Unser Hobby: Mineralien, Gesteine und Fossilien</h2>
+      <h2>Unser Hobby: Mineralien, Gesteine und Fossilien<span class="subtitle">Erfahrungen der Mineralienfreunde Bernau</span></h2>
       <div class="byline">Mineralienfreunde Bernau (Hrsg.) · res publica Wissenschaftsverlag · ISBN 978-3-95968-143-8</div>
       <p class="desc">Unser eigenes Buch mit Erfahrungen, Fundstücken und Anekdoten aus vier Jahrzehnten Vereinsgeschichte — erscheint in Kürze.</p>
-      <a class="link-line" href="https://www.respublica-verlag.de/werke-sachliteratur/978-3-95968-143-8" target="_blank" rel="noopener">Zum Verlag →</a>
+      <a class="link-line" href="https://www.respublica-verlag.de/werke-sachliteratur/978-3-95968-143-8" target="_blank" rel="noopener">Bestellen →</a>
     </div>
   </div>
 
-  <div class="lit-item">
-    <span class="lit-tag tag-zeitschrift">Zeitschrift</span>
-    <div>
-      <h2>der Aufschluss</h2>
-      <div class="byline">Vereinigung der Freunde der Mineralogie und Geologie e.V. (VFMG)</div>
-      <p class="desc">Die geowissenschaftliche Fachzeitschrift der VFMG, viermal im Jahr erscheinend, mit Beiträgen zu Mineralogie, Petrographie, Geologie und Paläontologie. Die Beilage „Aktuell" ergänzt sie um aktuelle Vereinsnachrichten.</p>
-      <a class="link-line" href="https://vfmg.de" target="_blank" rel="noopener">vfmg.de →</a>
-    </div>
-  </div>
-
-  <div class="group-head">
-    <h2>Literaturempfehlungen und Internetquellen</h2>
-    <p>Die folgende Liste stammt direkt aus unserem Buch — eine Auswahl, die insbesondere für Einsteigerinnen und Einsteiger ins Hobby gedacht ist. Bei jedem Titel ist Platz für die ISBN vorgesehen; einen Amazon-Link setzen wir nur dort, wo die ISBN geprüft und bestätigt ist — erkennbar am grünen „geprüft"-Hinweis. Bei den übrigen Titeln steht „ISBN: wird ergänzt", bis wir sie nach und nach verifiziert haben.</p>
+  <div class="group-head" style="margin-top:20px;">
+    <p>Nachfolgend findet ihr eine Auswahl an Literatur, die unserer Auffassung nach insbesondere für Einsteigerinnen und Einsteiger ins Hobby geeignet ist. Ein farbiges Kästchen zeigt jeweils die Verfügbarkeit, nach unserer Kenntnis, an: <span class="status status-buchhandel" style="margin-left:0;">Buchhandel erhältlich</span>, <span class="status status-gebraucht" style="margin-left:0;">gebraucht erhältlich</span> oder <span class="status status-vergriffen" style="margin-left:0;">vergriffen</span>.</p>
   </div>
 
   <div class="filters" role="group" aria-label="Nach Sammelgebiet filtern">
+    <span class="filter-label">Filter</span>
     <button class="filter-btn active" data-filter="alle">Alle</button>
     <button class="filter-btn" data-filter="mineralien">Mineralien</button>
     <button class="filter-btn" data-filter="gesteine">Gesteine</button>
@@ -303,25 +327,19 @@
     <button class="filter-btn" data-filter="bearbeitung">Bearbeitung</button>
   </div>
 
-  <div class="group-head" style="margin-top:40px;">
-    <span class="eyebrow">Neu &amp; im Handel</span>
-    <h2>Im Buchhandel erhältlich</h2>
-    <p>Diese Titel sind nach unserer Einschätzung derzeit noch neu erhältlich. Einen Amazon-Link gibt es nur, wenn die ISBN bereits geprüft ist — sonst steht hier vorerst „ISBN: wird ergänzt".</p>
+  <div class="filters-fixed" role="group" aria-label="Nach Sammelgebiet filtern">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" data-filter="alle">Alle</button>
+    <button class="filter-btn" data-filter="mineralien">Mineralien</button>
+    <button class="filter-btn" data-filter="gesteine">Gesteine</button>
+    <button class="filter-btn" data-filter="fossilien">Fossilien</button>
+    <button class="filter-btn" data-filter="bearbeitung">Bearbeitung</button>
   </div>
 
     <div class="lit-item" data-cat="mineralien">
       <span class="lit-tag cat-mineralien">Mineralien</span>
       <div>
-        <h3>Mineralien reinigen, präparieren und aufbewahren. Das Arbeitsbuch für den Sammler</h3>
-        <div class="byline">Duthaler, Rudolf / Weiss, Stefan (2008) &middot; Christian Weise Verlag &middot; vollständig überarbeitete Neuauflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="mineralien">
-      <span class="lit-tag cat-mineralien">Mineralien</span>
-      <div>
-        <h3>Achate sammeln in Deutschland. Ein praktischer Führer zu den Achatvorkommen in Sachsen, Brandenburg, Thüringen und Sachsen-Anhalt</h3>
+        <h3>Achate sammeln in Deutschland<span class="subtitle">Ein praktischer Führer zu den Achatvorkommen in Sachsen, Brandenburg, Thüringen und Sachsen-Anhalt</span></h3>
         <div class="byline">Haake, Reiner (2000) &middot; Bode Verlag</div>
         <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
       </div>
@@ -330,8 +348,8 @@
     <div class="lit-item" data-cat="mineralien">
       <span class="lit-tag cat-mineralien">Mineralien</span>
       <div>
-        <h3>Mineralien-Enzyklopädie</h3>
-        <div class="byline">Korbel, Petr / Novak, Milan (2002) &middot; Nebel Verlag</div>
+        <h3>Achate – Naturschönheiten aus Sachsen</h3>
+        <div class="byline">Beck, Werner / Beck, Christa (2014) &middot; Museumsschriftenreihe, Direktbezug über das Museum &middot; Veröffentlichungen des Museums für Naturkunde Chemnitz, Bd. 37</div>
         <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
       </div>
     </div>
@@ -339,17 +357,53 @@
     <div class="lit-item" data-cat="mineralien">
       <span class="lit-tag cat-mineralien">Mineralien</span>
       <div>
-        <h3>Die Mineralien des Harzes. Entdecken – Sammeln – Bestimmen</h3>
+        <h3>Der große BLV Naturführer Steine und Mineralien<span class="subtitle">Das Standardwerk</span></h3>
+        <div class="byline">Schumann, Walter (2023) &middot; 15. Auflage &middot; Gräfe und Unzer Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-8354-1594-2 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien">
+      <span class="lit-tag cat-mineralien">Mineralien</span>
+      <div>
+        <h3>Der Micromounter<span class="subtitle">So sammelt man erfolgreich Kleinmineralien</span></h3>
+        <div class="byline">Kipfer, Alexander (1984) &middot; 2. Auflage &middot; Ott Verlag</div>
+        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien">
+      <span class="lit-tag cat-mineralien">Mineralien</span>
+      <div>
+        <h3>Der Mineraliensammler<span class="subtitle">Über den Aufbau von Sammlungen, und was man dazu wissen sollte</span></h3>
+        <div class="byline">Lieber, Werner (1973) &middot; 6. Auflage &middot; Ott Verlag Thun</div>
+        <div class="isbn-pending">ISBN: 3-7225-6229-5 <span class="status status-gebraucht">gebraucht erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien">
+      <span class="lit-tag cat-mineralien">Mineralien</span>
+      <div>
+        <h3>Die Mineralien des Harzes<span class="subtitle">Entdecken – Sammeln – Bestimmen</span></h3>
         <div class="byline">Liessmann, Wilfried / Gröbner, Joachim (2020) &middot; Quelle & Meyer Verlag</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+        <div class="isbn-pending">ISBN: 978-3-494-01826-3 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
       </div>
     </div>
 
     <div class="lit-item" data-cat="mineralien">
       <span class="lit-tag cat-mineralien">Mineralien</span>
       <div>
-        <h3>Der große BLV Naturführer Steine und Mineralien. Das Standardwerk</h3>
-        <div class="byline">Schumann, Walter (2023) &middot; Gräfe und Unzer Verlag &middot; 15. Auflage</div>
+        <h3>Gesteinskunde<span class="subtitle">Ein Leitfaden für Einsteiger und Anwender</span></h3>
+        <div class="byline">Sebastian, Ulrich (2022) &middot; 5. Auflage &middot; Springer-Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-662-64850-6 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien">
+      <span class="lit-tag cat-mineralien">Mineralien</span>
+      <div>
+        <h3>Micromounts<span class="subtitle">Arbeitsbuch für Mineraliensammler</span></h3>
+        <div class="byline">Vollstädt, Heiner / Voigt, Günter / Vogel, Andreas (2012) &middot; Reprint der 1. Auflage von 1987 &middot; Springer-Verlag</div>
         <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
       </div>
     </div>
@@ -366,18 +420,9 @@
     <div class="lit-item" data-cat="mineralien">
       <span class="lit-tag cat-mineralien">Mineralien</span>
       <div>
-        <h3>Gesteinskunde. Ein Leitfaden für Einsteiger und Anwender</h3>
-        <div class="byline">Sebastian, Ulrich (2022) &middot; Springer-Verlag &middot; 5. Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="mineralien">
-      <span class="lit-tag cat-mineralien">Mineralien</span>
-      <div>
-        <h3>Micromounts. Arbeitsbuch für Mineraliensammler</h3>
-        <div class="byline">Vollstädt, Heiner / Voigt, Günter / Vogel, Andreas (2012) &middot; Springer-Verlag &middot; Reprint der 1. Auflage von 1987</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+        <h3>Minerale<span class="subtitle">Sammeln und bestimmen</span></h3>
+        <div class="byline">Seim, Rolf (1987) &middot; 2., überarbeitete u. neugestaltete Auflage &middot; Urania-Verlag</div>
+        <div class="isbn-pending">ISBN: 3-332-00122-1 <span class="status status-gebraucht">gebraucht erhältlich</span></div>
       </div>
     </div>
 
@@ -385,7 +430,43 @@
       <span class="lit-tag cat-mineralien">Mineralien</span>
       <div>
         <h3>Mineralfundorte und ihre Mineralien in Deutschland</h3>
-        <div class="byline">Wittern, Artur (2010) &middot; E. Schweizerbart'sche Verlagsbuchhandlung &middot; 3., überarbeitete Auflage</div>
+        <div class="byline">Wittern, Artur (2010) &middot; 3., überarbeitete Auflage &middot; E. Schweizerbart'sche Verlagsbuchhandlung</div>
+        <div class="isbn-pending">ISBN: 978-3-510-65264-8 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien">
+      <span class="lit-tag cat-mineralien">Mineralien</span>
+      <div>
+        <h3>Mineralien<span class="subtitle">Handbuch und Führer für den Sammler</span></h3>
+        <div class="byline">Duda, Rudolf / Rejl, Luboš / Slivka, Dušan (1991) &middot; Natur Verlag</div>
+        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien">
+      <span class="lit-tag cat-mineralien">Mineralien</span>
+      <div>
+        <h3>Mineralien reinigen, präparieren und aufbewahren<span class="subtitle">Das Arbeitsbuch für den Sammler</span></h3>
+        <div class="byline">Duthaler, Rudolf / Weiss, Stefan (2008) &middot; vollständig überarbeitete Neuauflage &middot; Christian Weise Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-921656-70-9 <span class="status status-vergriffen">vergriffen</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien">
+      <span class="lit-tag cat-mineralien">Mineralien</span>
+      <div>
+        <h3>Mineralien-Anschliffe<span class="subtitle">Trennen, Schleifen und Polieren von Mineralien, Erzen und Gesteinen im Amateurverfahren</span></h3>
+        <div class="byline">Burghardt, W. (1980) &middot; Kulturbund der DDR</div>
+        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien">
+      <span class="lit-tag cat-mineralien">Mineralien</span>
+      <div>
+        <h3>Mineralien-Enzyklopädie</h3>
+        <div class="byline">Korbel, Petr / Novak, Milan (2002) &middot; Nebel Verlag</div>
         <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
       </div>
     </div>
@@ -393,8 +474,8 @@
     <div class="lit-item" data-cat="gesteine">
       <span class="lit-tag cat-gesteine">Gesteine</span>
       <div>
-        <h3>Die Gesteine Deutschlands. Fundorte – Bestimmung – Verwendung</h3>
-        <div class="byline">Becker, Heinrich (2022) &middot; Quelle & Meyer Verlag &middot; 2., überarbeitete und ergänzte Auflage</div>
+        <h3>Das große Buch der Strandsteine<span class="subtitle">Die 300 häufigsten Steine an Nord- und Ostsee</span></h3>
+        <div class="byline">Rudolph, Frank (2017) &middot; Wachholtz Verlag</div>
         <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
       </div>
     </div>
@@ -402,8 +483,35 @@
     <div class="lit-item" data-cat="gesteine">
       <span class="lit-tag cat-gesteine">Gesteine</span>
       <div>
-        <h3>Gesteinsbestimmung: Grundlagen und Praxis</h3>
-        <div class="byline">Hann, Horst Peter (2024) &middot; Quelle & Meyer Verlag &middot; 3., korrigierte Auflage</div>
+        <h3>Der Gesteinssammler<span class="subtitle">Eine Anleitung zum Sammeln und Erkennen von Gesteinen und zum Aufbau einer Sammlung</span></h3>
+        <div class="byline">Pape, Hansgeorg (1978) &middot; 3., verbesserte Auflage &middot; Franckh'sche Verlagshandlung</div>
+        <div class="isbn-pending">ISBN: 3-440-04637-0 <span class="status status-gebraucht">gebraucht erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="gesteine">
+      <span class="lit-tag cat-gesteine">Gesteine</span>
+      <div>
+        <h3>Der große BLV Naturführer Steine und Mineralien<span class="subtitle">Das Standardwerk</span></h3>
+        <div class="byline">Schumann, Walter (2023) &middot; 15. Auflage &middot; Gräfe und Unzer Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-8354-1594-2 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="gesteine">
+      <span class="lit-tag cat-gesteine">Gesteine</span>
+      <div>
+        <h3>Die Gesteine Deutschlands<span class="subtitle">Fundorte – Bestimmung – Verwendung</span></h3>
+        <div class="byline">Becker, Heinrich (2022) &middot; 2., überarbeitete und ergänzte Auflage &middot; Quelle & Meyer Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-494-01892-8 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="gesteine">
+      <span class="lit-tag cat-gesteine">Gesteine</span>
+      <div>
+        <h3>Geologische Streifzüge<span class="subtitle">Landschaft und Erdgeschichte zwischen Kap Arkona und Fichtelberg</span></h3>
+        <div class="byline">Wagenbreth, Otfried / Steiner, Walter (Hrsg.) (2015) &middot; 4. Auflage, Nachdruck von 1990 &middot; Springer Spektrum</div>
         <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
       </div>
     </div>
@@ -411,8 +519,44 @@
     <div class="lit-item" data-cat="gesteine">
       <span class="lit-tag cat-gesteine">Gesteine</span>
       <div>
-        <h3>Steinreicher Harz. Eine Gesteinskunde für Einsteiger und Fortgeschrittene</h3>
-        <div class="byline">Liessmann, Wilfried (2018) &middot; Quelle & Meyer Verlag</div>
+        <h3>Gesteinsbestimmung<span class="subtitle">Grundlagen und Praxis</span></h3>
+        <div class="byline">Hann, Horst Peter (2024) &middot; 3., korrigierte Auflage &middot; Quelle & Meyer Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-494-01966-6 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="gesteine">
+      <span class="lit-tag cat-gesteine">Gesteine</span>
+      <div>
+        <h3>Gesteinsbestimmung im Gelände</h3>
+        <div class="byline">Vinx, Roland (2014) &middot; 4., neu bearbeitete und aktualisierte Auflage &middot; Springer Spektrum</div>
+        <div class="isbn-pending">ISBN: 978-3-642-55417-9 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="gesteine">
+      <span class="lit-tag cat-gesteine">Gesteine</span>
+      <div>
+        <h3>Gesteinsbestimmungsbuch</h3>
+        <div class="byline">Jubelt, Rudolf / Schreiter, Peter (1987) &middot; 6., überarbeitete Auflage &middot; VEB Deutscher Verlag für Grundstoffindustrie</div>
+        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="gesteine">
+      <span class="lit-tag cat-gesteine">Gesteine</span>
+      <div>
+        <h3>Leitfaden zur Gesteinsbestimmung</h3>
+        <div class="byline">Pape, Hansgeorg (1988) &middot; 5., unveränderte Auflage &middot; Ferdinand Enke Verlag</div>
+        <div class="isbn-pending">ISBN: 3-432-84345-3 <span class="status status-gebraucht">gebraucht erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="gesteine">
+      <span class="lit-tag cat-gesteine">Gesteine</span>
+      <div>
+        <h3>Nordische Geschiebe – ein interessantes Gebiet für Gesteins-, Mineralien- und Fossiliensammler</h3>
+        <div class="byline">Beck, Werner / Beck, Jana (2021) &middot; Museumsschriftenreihe, Direktbezug über das Museum &middot; Veröffentlichungen des Museums für Naturkunde Chemnitz, Bd. 44</div>
         <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
       </div>
     </div>
@@ -422,209 +566,14 @@
       <div>
         <h3>Nordseefunde</h3>
         <div class="byline">Reinicke, Rolf (2010) &middot; Demmler Verlag</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+        <div class="isbn-pending">ISBN: 978-3-910150-85-0 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
       </div>
     </div>
 
     <div class="lit-item" data-cat="gesteine">
       <span class="lit-tag cat-gesteine">Gesteine</span>
       <div>
-        <h3>Das große Buch der Strandsteine. Die 300 häufigsten Steine an Nord- und Ostsee</h3>
-        <div class="byline">Rudolph, Frank (2017) &middot; Wachholtz Verlag</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="gesteine">
-      <span class="lit-tag cat-gesteine">Gesteine</span>
-      <div>
-        <h3>Strandsteine. Sammeln und Bestimmen von Steinen an der Nord- und Ostsee</h3>
-        <div class="byline">Rudolph, Frank (2025) &middot; Ellert & Richter Verlag</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="gesteine">
-      <span class="lit-tag cat-gesteine">Gesteine</span>
-      <div>
-        <h3>Steine an Fluss, Strand & Küste. Steine am Wasser sammeln – und ihre Geschichte kennenlernen</h3>
-        <div class="byline">Rudolph, Frank / Bayer, Bernhard / Bartholomäus, Werner / Loga, Sven von (2024) &middot; Kosmos Verlag</div>
-        <div class="isbn-pending">ISBN: 978-3-440-16885-1 <span class="verified">geprüft</span></div>
-        <a class="link-line" href="https://www.amazon.de/s?k=9783440168851" target="_blank" rel="noopener">Bei Amazon suchen &rarr;</a>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="gesteine">
-      <span class="lit-tag cat-gesteine">Gesteine</span>
-      <div>
-        <h3>Der große BLV Naturführer Steine und Mineralien. Das Standardwerk</h3>
-        <div class="byline">Schumann, Walter (2023) &middot; Gräfe und Unzer Verlag &middot; 15. Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="gesteine">
-      <span class="lit-tag cat-gesteine">Gesteine</span>
-      <div>
-        <h3>Gesteinsbestimmung im Gelände</h3>
-        <div class="byline">Vinx, Roland (2014) &middot; Springer Spektrum &middot; 4., neu bearbeitete und aktualisierte Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="gesteine">
-      <span class="lit-tag cat-gesteine">Gesteine</span>
-      <div>
-        <h3>Steine an deutschen Küsten. Finden und Bestimmen</h3>
-        <div class="byline">Vinx, Roland (2016) &middot; Quelle & Meyer Verlag</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="gesteine">
-      <span class="lit-tag cat-gesteine">Gesteine</span>
-      <div>
-        <h3>Geologische Streifzüge. Landschaft und Erdgeschichte zwischen Kap Arkona und Fichtelberg</h3>
-        <div class="byline">Wagenbreth, Otfried / Steiner, Walter (Hrsg.) (2015) &middot; Springer Spektrum &middot; 4. Auflage, Nachdruck von 1990</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="fossilien">
-      <span class="lit-tag cat-fossilien">Fossilien</span>
-      <div>
-        <h3>Bernstein an unseren Küsten. Finden – Bestimmen – Bearbeiten</h3>
-        <div class="byline">Holt, Kerstin von (2021) &middot; Quelle & Meyer Verlag &middot; 2. Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="fossilien">
-      <span class="lit-tag cat-fossilien">Fossilien</span>
-      <div>
-        <h3>Fossilien am Ostseestrand</h3>
-        <div class="byline">Reinicke, Rolf (2024) &middot; Demmler Verlag &middot; 3. Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="fossilien">
-      <span class="lit-tag cat-fossilien">Fossilien</span>
-      <div>
-        <h3>Handbuch des Fossiliensammlers. Ein Wegweiser für die Praxis mit über 1300 Fossilien</h3>
-        <div class="byline">Richter, Andreas E. (2011) &middot; Kosmos Verlag &middot; alternative ältere Ausgabe 1999 bei Bechtermünz Verlag</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="fossilien">
-      <span class="lit-tag cat-fossilien">Fossilien</span>
-      <div>
-        <h3>Welche Versteinerungen finde ich an Meer und Strand</h3>
-        <div class="byline">Rudolph, Frank (2025) &middot; Ellert & Richter Verlag &middot; 2., aktualisierte und erweiterte Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="fossilien">
-      <span class="lit-tag cat-fossilien">Fossilien</span>
-      <div>
-        <h3>Fossilien an deutschen Küsten. Finden und Bestimmen</h3>
-        <div class="byline">Rudolph, Frank / Bilz, Wolfgang / Pittermann, Dirk (2019) &middot; Quelle & Meyer Verlag &middot; 2. Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="fossilien">
-      <span class="lit-tag cat-fossilien">Fossilien</span>
-      <div>
-        <h3>Der Steinkern</h3>
-        <div class="byline">Zeitschrift &middot; ISSN 1867-8858 &middot; Steinkern Verlag</div>
-        <a class="link-line" href="https://steinkern.de" target="_blank" rel="noopener">steinkern.de &rarr;</a>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="fossilien">
-      <span class="lit-tag cat-fossilien">Fossilien</span>
-      <div>
-        <h3>Fossilien – Erdgeschichte erleben</h3>
-        <div class="byline">Zeitschrift &middot; ISSN 0175-5021 &middot; Quelle &amp; Meyer Verlag</div>
-      </div>
-    </div>
-
-  <div class="group-head">
-    <span class="eyebrow">Vergriffen</span>
-    <h2>Antiquarisch erhältlich</h2>
-    <p>Diese Titel sind vermutlich nicht mehr neu im Handel — am ehesten über Antiquariate, Börsen oder Plattformen wie ZVAB und Booklooker zu finden.</p>
-  </div>
-
-    <div class="lit-item" data-cat="mineralien">
-      <span class="lit-tag cat-mineralien">Mineralien</span>
-      <div>
-        <h3>Achate – Naturschönheiten aus Sachsen</h3>
-        <div class="byline">Beck, Werner / Beck, Christa (2014) &middot; Veröffentlichungen des Museums für Naturkunde Chemnitz, Bd. 37 &middot; Museumsschriftenreihe, Direktbezug über das Museum</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="mineralien">
-      <span class="lit-tag cat-mineralien">Mineralien</span>
-      <div>
-        <h3>Mineralien-Anschliffe. Trennen, Schleifen und Polieren von Mineralien, Erzen und Gesteinen im Amateurverfahren</h3>
-        <div class="byline">Burghardt, W. (1980) &middot; Kulturbund der DDR</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="mineralien">
-      <span class="lit-tag cat-mineralien">Mineralien</span>
-      <div>
-        <h3>Mineralien. Handbuch und Führer für den Sammler</h3>
-        <div class="byline">Duda, Rudolf / Rejl, Luboš / Slivka, Dušan (1991) &middot; Natur Verlag</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="mineralien">
-      <span class="lit-tag cat-mineralien">Mineralien</span>
-      <div>
-        <h3>Der Micromounter. So sammelt man erfolgreich Kleinmineralien</h3>
-        <div class="byline">Kipfer, Alexander (1984) &middot; Ott Verlag &middot; 2. Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="mineralien">
-      <span class="lit-tag cat-mineralien">Mineralien</span>
-      <div>
-        <h3>Der Mineraliensammler. Über den Aufbau von Sammlungen, und was man dazu wissen sollte</h3>
-        <div class="byline">Lieber, Werner (1973) &middot; Ott Verlag Thun &middot; 6. Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="mineralien">
-      <span class="lit-tag cat-mineralien">Mineralien</span>
-      <div>
-        <h3>Mineralien. Sammeln und bestimmen</h3>
-        <div class="byline">Seim, Rolf (1987) &middot; Neumann Verlag &middot; 2., überarbeitete u. neugestaltete Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="gesteine">
-      <span class="lit-tag cat-gesteine">Gesteine</span>
-      <div>
-        <h3>Nordische Geschiebe – ein interessantes Gebiet für Gesteins-, Mineralien- und Fossiliensammler</h3>
-        <div class="byline">Beck, Werner / Beck, Jana (2021) &middot; Veröffentlichungen des Museums für Naturkunde Chemnitz, Bd. 44 &middot; Museumsschriftenreihe, Direktbezug über das Museum</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
-      </div>
-    </div>
-
-    <div class="lit-item" data-cat="gesteine">
-      <span class="lit-tag cat-gesteine">Gesteine</span>
-      <div>
-        <h3>Plattentektonik. Kontinentverschiebung und Gebirgsbildung</h3>
+        <h3>Plattentektonik<span class="subtitle">Kontinentverschiebung und Gebirgsbildung</span></h3>
         <div class="byline">Frisch, Wolfgang / Meschede, Martin (2005) &middot; Wissenschaftliche Buchgesellschaft</div>
         <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
       </div>
@@ -633,8 +582,26 @@
     <div class="lit-item" data-cat="gesteine">
       <span class="lit-tag cat-gesteine">Gesteine</span>
       <div>
-        <h3>Gesteinsbestimmungsbuch</h3>
-        <div class="byline">Jubelt, Rudolf / Schreiter, Peter (1987) &middot; VEB Deutscher Verlag für Grundstoffindustrie &middot; 6., überarbeitete Auflage</div>
+        <h3>Steine an deutschen Küsten<span class="subtitle">Finden und Bestimmen</span></h3>
+        <div class="byline">Vinx, Roland (2016) &middot; Quelle & Meyer Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-494-01685-6 <span class="status status-gebraucht">gebraucht erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="gesteine">
+      <span class="lit-tag cat-gesteine">Gesteine</span>
+      <div>
+        <h3>Steine an Fluss, Strand & Küste<span class="subtitle">Steine am Wasser sammeln – und ihre Geschichte kennenlernen</span></h3>
+        <div class="byline">Rudolph, Frank / Bayer, Bernhard / Bartholomäus, Werner / Loga, Sven von (2024) &middot; Kosmos Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-440-18070-9 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="gesteine">
+      <span class="lit-tag cat-gesteine">Gesteine</span>
+      <div>
+        <h3>Steine aus dem Norden<span class="subtitle">Geschiebe als Zeugen der Eiszeit in Norddeutschland</span></h3>
+        <div class="byline">Smed, Per (2002) &middot; 2., verbesserte Auflage &middot; Borntraeger Verlag</div>
         <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
       </div>
     </div>
@@ -642,27 +609,27 @@
     <div class="lit-item" data-cat="gesteine">
       <span class="lit-tag cat-gesteine">Gesteine</span>
       <div>
-        <h3>Leitfaden zur Gesteinsbestimmung</h3>
-        <div class="byline">Pape, Hansgeorg (1988) &middot; Ferdinand Enke Verlag &middot; 5., unveränderte Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+        <h3>Steinreicher Harz<span class="subtitle">Eine Gesteinskunde für Einsteiger und Fortgeschrittene</span></h3>
+        <div class="byline">Liessmann, Wilfried (2018) &middot; Quelle & Meyer Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-494-01734-1 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
       </div>
     </div>
 
     <div class="lit-item" data-cat="gesteine">
       <span class="lit-tag cat-gesteine">Gesteine</span>
       <div>
-        <h3>Der Gesteinssammler. Eine Anleitung zum Sammeln und Erkennen von Gesteinen und zum Aufbau einer Sammlung</h3>
-        <div class="byline">Pape, Hansgeorg (1978) &middot; Franckh'sche Verlagshandlung &middot; 3., verbesserte Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+        <h3>Strandsteine<span class="subtitle">Sammeln und Bestimmen von Steinen an der Nord- und Ostsee</span></h3>
+        <div class="byline">Rudolph, Frank (2025) &middot; Ellert & Richter Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-8319-0894-3 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
       </div>
     </div>
 
-    <div class="lit-item" data-cat="gesteine">
-      <span class="lit-tag cat-gesteine">Gesteine</span>
+    <div class="lit-item" data-cat="fossilien">
+      <span class="lit-tag cat-fossilien">Fossilien</span>
       <div>
-        <h3>Steine aus dem Norden. Geschiebe als Zeugen der Eiszeit in Norddeutschland</h3>
-        <div class="byline">Smed, Per (2002) &middot; Borntraeger Verlag &middot; 2., verbesserte Auflage</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+        <h3>Bernstein an unseren Küsten<span class="subtitle">Finden – Bestimmen – Bearbeiten</span></h3>
+        <div class="byline">Holt, Kerstin von (2021) &middot; 2. Auflage &middot; Quelle & Meyer Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-494-01869-0 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
       </div>
     </div>
 
@@ -671,21 +638,57 @@
       <div>
         <h3>Einführung in die Geschiebeforschung (Sedimentärgeschiebe)</h3>
         <div class="byline">Hucke, Kurt (1967) &middot; Nederlandse Geologische Vereniging-Oldenzaal</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+        <div class="isbn-pending">ISBN: <em>nicht vorhanden</em></div>
       </div>
     </div>
 
     <div class="lit-item" data-cat="fossilien">
       <span class="lit-tag cat-fossilien">Fossilien</span>
       <div>
-        <h3>Versteinerungen. Erkennen & bestimmen</h3>
-        <div class="byline">Lichter, Gerhard (2003) &middot; Verlag Eugen Ulmer &middot; 2. Auflage, Reihe Steinbachs Naturführer</div>
-        <div class="isbn-pending">ISBN: <em>wird ergänzt</em></div>
+        <h3>Fossilien am Ostseestrand</h3>
+        <div class="byline">Reinicke, Rolf (2024) &middot; 3. Auflage &middot; Demmler Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-944102-36-8 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="fossilien">
+      <span class="lit-tag cat-fossilien">Fossilien</span>
+      <div>
+        <h3>Fossilien an deutschen Küsten<span class="subtitle">Finden und Bestimmen</span></h3>
+        <div class="byline">Rudolph, Frank / Bilz, Wolfgang / Pittermann, Dirk (2019) &middot; 2. Auflage &middot; Quelle & Meyer Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-494-01590-3 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="fossilien">
+      <span class="lit-tag cat-fossilien">Fossilien</span>
+      <div>
+        <h3>Handbuch des Fossiliensammlers<span class="subtitle">Ein Wegweiser für die Praxis mit über 1300 Fossilien</span></h3>
+        <div class="byline">Richter, Andreas E. (1999) &middot; Bechtermünz Verlag</div>
+        <div class="isbn-pending">ISBN: 3-8289-1545-0 <span class="status status-gebraucht">gebraucht erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="fossilien">
+      <span class="lit-tag cat-fossilien">Fossilien</span>
+      <div>
+        <h3>Versteinerungen<span class="subtitle">Erkennen & bestimmen</span></h3>
+        <div class="byline">Lichter, Gerhard (2003) &middot; 2. Auflage, Reihe Steinbachs Naturführer &middot; Verlag Eugen Ulmer</div>
+        <div class="isbn-pending">ISBN: 978-3-8001-4298-9 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="fossilien">
+      <span class="lit-tag cat-fossilien">Fossilien</span>
+      <div>
+        <h3>Welche Versteinerungen finde ich an Meer und Strand</h3>
+        <div class="byline">Rudolph, Frank (2025) &middot; 2., aktualisierte und erweiterte Auflage &middot; Ellert & Richter Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-8319-0854-7 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
       </div>
     </div>
 
     <div class="lit-item" data-cat="bearbeitung">
-      <span class="lit-tag cat-bearbeitung">Mineral- und Edelsteinbearbeitung</span>
+      <span class="lit-tag cat-bearbeitung">Mineralien‑&nbsp;und&nbsp;Edel-steinbearbeitung</span>
       <div>
         <h3>Edle Steine schleifen</h3>
         <div class="byline">Hartig, Herbert (1974) &middot; Frech-Verlag</div>
@@ -694,7 +697,7 @@
     </div>
 
     <div class="lit-item" data-cat="bearbeitung">
-      <span class="lit-tag cat-bearbeitung">Mineral- und Edelsteinbearbeitung</span>
+      <span class="lit-tag cat-bearbeitung">Mineralien‑&nbsp;und&nbsp;Edel-steinbearbeitung</span>
       <div>
         <h3>Kunsthandwerkliches Schleifen und Verarbeiten von Schmucksteinen</h3>
         <div class="byline">Kühne, Klaus / Brepohl, Erhard (1992) &middot; Fachbuchverlag Leipzig</div>
@@ -703,40 +706,85 @@
     </div>
 
   <div class="group-head">
-    <span class="eyebrow">Aus dem Buch</span>
-    <h2>Internetquellen</h2>
-    <p>Ebenfalls aus Kapitel 6 unseres Buches — Webseiten und Online-Datenbanken, die viele von uns regelmäßig nutzen.</p>
+    <span class="eyebrow">Regelmäßig erscheinend</span>
+    <h2>Zeitschriften</h2>
   </div>
 
-    <div class="lit-item">
-      <span class="lit-tag tag-zeitschrift">Online</span>
+    <div class="lit-item" data-cat="mineralien gesteine fossilien">
+      <div class="lit-tag-stack">
+        <span class="lit-tag cat-mineralien">Mineralien</span>
+        <span class="lit-tag cat-gesteine">Gesteine</span>
+        <span class="lit-tag cat-fossilien">Fossilien</span>
+      </div>
       <div>
-        <h3>Mineralienatlas – Fossilienatlas – Geologieatlas</h3>
-        <div class="byline">Geolitho Stiftung gemeinnützige GmbH</div>
-        <p class="desc">Große deutschsprachige Sammler-Datenbank zu Mineralien, Fossilien und Fundorten.</p>
-        <a class="link-line" href="https://www.mineralienatlas.de" target="_blank" rel="noopener">www.mineralienatlas.de &rarr;</a>
+        <h3>der Aufschluss</h3>
+        <div class="byline">Vereinigung der Freunde der Mineralogie und Geologie e.V. (VFMG) &middot; ISSN 0004-7856</div>
+        <p class="desc">Die geowissenschaftliche Fachzeitschrift der VFMG, viermal im Jahr erscheinend, mit Beiträgen zu Mineralogie, Petrographie, Geologie und Paläontologie. Die Beilage „Aktuell" ergänzt sie um aktuelle Vereinsnachrichten.</p>
+        <a class="link-line" href="https://vfmg.de" target="_blank" rel="noopener">vfmg.de &rarr;</a>
       </div>
     </div>
 
-    <div class="lit-item">
-      <span class="lit-tag tag-zeitschrift">Online</span>
+    <div class="lit-item" data-cat="fossilien">
+      <span class="lit-tag cat-fossilien">Fossilien</span>
       <div>
-        <h3>mindat.org</h3>
-        <div class="byline">Hudson Institute of Mineralogy</div>
-        <p class="desc">Die weltweit größte offene Datenbank über Mineralien, Gesteine und Meteoriten.</p>
-        <a class="link-line" href="https://www.mindat.org" target="_blank" rel="noopener">www.mindat.org &rarr;</a>
+        <h3>Der Steinkern</h3>
+        <div class="byline">Steinkern Verlag &middot; ISSN 1867-8858</div>
+        <a class="link-line" href="https://steinkern.de" target="_blank" rel="noopener">steinkern.de &rarr;</a>
       </div>
     </div>
 
-    <div class="lit-item">
-      <span class="lit-tag tag-zeitschrift">Online</span>
+    <div class="lit-item" data-cat="fossilien">
+      <span class="lit-tag cat-fossilien">Fossilien</span>
       <div>
-        <h3>kristallin.de</h3>
-        <div class="byline">Matthias Bräunlich</div>
-        <p class="desc">Übersichtsseite rund um das Thema Gesteine.</p>
-        <a class="link-line" href="https://www.kristallin.de" target="_blank" rel="noopener">www.kristallin.de &rarr;</a>
+        <h3>Fossilien – Erdgeschichte erleben</h3>
+        <div class="byline">Quelle &amp; Meyer Verlag &middot; ISSN 0175-5021</div>
+        <a class="link-line" href="https://www.fossilien-journal.de" target="_blank" rel="noopener">fossilien-journal.de &rarr;</a>
       </div>
     </div>
+
+    <div class="lit-item" data-cat="gesteine">
+      <span class="lit-tag cat-gesteine">Gesteine</span>
+      <div>
+        <h3>Geschiebekunde aktuell</h3>
+        <div class="byline">Gesellschaft für Geschiebekunde e.V. &middot; ISSN 0178-1731</div>
+        <a class="link-line" href="https://www.geschiebekunde.de/pubs/ga/" target="_blank" rel="noopener">geschiebekunde.de/pubs/ga &rarr;</a>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien">
+      <span class="lit-tag cat-mineralien">Mineralien</span>
+      <div>
+        <h3>Lapis</h3>
+        <div class="byline">Christian Weise Verlag &middot; ISSN 0176-1285</div>
+        <a class="link-line" href="https://www.lapis.de" target="_blank" rel="noopener">lapis.de &rarr;</a>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien">
+      <span class="lit-tag cat-mineralien">Mineralien</span>
+      <div>
+        <h3>Mineralica</h3>
+        <div class="byline">Sevenslash Media</div>
+        <a class="link-line" href="https://mineralica.com/de/magazin" target="_blank" rel="noopener">mineralica.com/de/magazin &rarr;</a>
+      </div>
+    </div>
+
+    <div class="lit-item" data-cat="mineralien gesteine fossilien">
+      <div class="lit-tag-stack">
+        <span class="lit-tag cat-mineralien">Mineralien</span>
+        <span class="lit-tag cat-gesteine">Gesteine</span>
+        <span class="lit-tag cat-fossilien">Fossilien</span>
+      </div>
+      <div>
+        <h3>Veröffentlichungen des Museums für Naturkunde Chemnitz</h3>
+        <div class="byline">Museum für Naturkunde Chemnitz &middot; ISSN 1432-1696</div>
+        <a class="link-line" href="https://www.naturkundemuseum-chemnitz.de" target="_blank" rel="noopener">naturkundemuseum-chemnitz.de &rarr;</a>
+      </div>
+    </div>
+
+  <div class="group-head">
+    <h2>Internetquellen</h2>
+  </div>
 
     <div class="lit-item">
       <span class="lit-tag tag-zeitschrift">Online</span>
@@ -751,10 +799,10 @@
     <div class="lit-item">
       <span class="lit-tag tag-zeitschrift">Online</span>
       <div>
-        <h3>strandsteine.de</h3>
-        <div class="byline">Frank Rudolph</div>
-        <p class="desc">Übersichtsseite zu allem, was man am Ostseestrand finden kann.</p>
-        <a class="link-line" href="http://strandsteine.de" target="_blank" rel="noopener">strandsteine.de &rarr;</a>
+        <h3>Einführung: Bearbeitung von Steinen</h3>
+        <div class="byline">Steinschleifmaschinen &amp; Lapidary Tools GmbH</div>
+        <p class="desc">Grundlagen zum Schleifen und Bearbeiten von Steinen.</p>
+        <a class="link-line" href="https://sammlermineralien.at/blogs/news/steine-schleifen-1" target="_blank" rel="noopener">sammlermineralien.at/blogs/news/steine-schleifen-1 &rarr;</a>
       </div>
     </div>
 
@@ -771,6 +819,36 @@
     <div class="lit-item">
       <span class="lit-tag tag-zeitschrift">Online</span>
       <div>
+        <h3>kristallin.de</h3>
+        <div class="byline">Matthias Bräunlich</div>
+        <p class="desc">Übersichtsseite rund um das Thema Gesteine.</p>
+        <a class="link-line" href="https://www.kristallin.de" target="_blank" rel="noopener">www.kristallin.de &rarr;</a>
+      </div>
+    </div>
+
+    <div class="lit-item">
+      <span class="lit-tag tag-zeitschrift">Online</span>
+      <div>
+        <h3>mindat.org</h3>
+        <div class="byline">Hudson Institute of Mineralogy</div>
+        <p class="desc">Die weltweit größte offene Datenbank über Mineralien, Gesteine und Meteoriten.</p>
+        <a class="link-line" href="https://www.mindat.org" target="_blank" rel="noopener">www.mindat.org &rarr;</a>
+      </div>
+    </div>
+
+    <div class="lit-item">
+      <span class="lit-tag tag-zeitschrift">Online</span>
+      <div>
+        <h3>Mineralienatlas – Fossilienatlas – Geologieatlas</h3>
+        <div class="byline">Geolitho Stiftung gemeinnützige GmbH</div>
+        <p class="desc">Große deutschsprachige Sammler-Datenbank zu Mineralien, Fossilien und Fundorten.</p>
+        <a class="link-line" href="https://www.mineralienatlas.de" target="_blank" rel="noopener">www.mineralienatlas.de &rarr;</a>
+      </div>
+    </div>
+
+    <div class="lit-item">
+      <span class="lit-tag tag-zeitschrift">Online</span>
+      <div>
         <h3>steinkern.de</h3>
         <div class="byline">Steinkern Verlag</div>
         <p class="desc">Fossilien-Community mit Fundberichten und Bestimmungshilfe.</p>
@@ -781,16 +859,16 @@
     <div class="lit-item">
       <span class="lit-tag tag-zeitschrift">Online</span>
       <div>
-        <h3>Einführung: Bearbeitung von Steinen</h3>
-        <div class="byline">Steinschleifmaschinen &amp; Lapidary Tools GmbH</div>
-        <p class="desc">Grundlagen zum Schleifen und Bearbeiten von Steinen.</p>
-        <a class="link-line" href="https://sammlermineralien.at/blogs/news/steine-schleifen-1" target="_blank" rel="noopener">sammlermineralien.at/blogs/news/steine-schleifen-1 &rarr;</a>
+        <h3>strandsteine.de</h3>
+        <div class="byline">Frank Rudolph</div>
+        <p class="desc">Übersichtsseite zu allem, was man am Ostseestrand finden kann.</p>
+        <a class="link-line" href="http://strandsteine.de" target="_blank" rel="noopener">strandsteine.de &rarr;</a>
       </div>
     </div>
 
   <div class="note-box">
     <strong>Habt ihr eine Empfehlung — oder eine ISBN zur Hand?</strong>
-    Diese Liste wächst gern weiter, und wir freuen uns über jede geprüfte ISBN, die noch fehlt — schreibt uns an <a href="mailto:bg.bernau-b-berlin@vfmg.de" style="color:var(--text-on-paper); border-bottom:1px solid var(--text-on-paper-dim);">bg.bernau-b-berlin@vfmg.de</a>.
+    Diese Liste wächst gern weiter, und wir freuen uns über Hinweise zu weiterer Literatur die für Einsteiger geeignet ist — schreibt uns an<br><a href="mailto:bg.bernau-b-berlin@vfmg.de" style="color:var(--text-on-paper); border-bottom:1px solid var(--text-on-paper-dim);">bg.bernau-b-berlin@vfmg.de</a>
   </div>
 
 </main>
@@ -808,15 +886,16 @@
 <script>
   const filterBtns = document.querySelectorAll('.filter-btn');
   const litItems = document.querySelectorAll('.lit-item[data-cat]');
+  const filterAnchor = document.querySelector('.filters');
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
       const filter = btn.dataset.filter;
+      filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
       litItems.forEach(item => {
-        const match = filter === 'alle' || item.dataset.cat === filter;
+        const match = filter === 'alle' || item.dataset.cat.split(' ').includes(filter);
         item.classList.toggle('hidden', !match);
       });
+      if(filterAnchor){ filterAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
   });
 </script>
