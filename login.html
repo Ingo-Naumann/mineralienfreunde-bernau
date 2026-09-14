@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login — Mineralienfreunde Bernau</title>
 <meta name="description" content="Anmeldung zum internen Bereich der Mineralienfreunde Bernau.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -26,6 +31,7 @@
     --font-mono:'IBM Plex Mono', monospace;
   }
   *{ box-sizing:border-box; }
+  html{ overflow-y:scroll; }
   body{ margin:0; background:var(--ink); color:var(--text-on-dark); font-family:var(--font-body); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column; }
   a{ color:inherit; } img,svg{ display:block; max-width:100%; }
   :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
@@ -33,7 +39,7 @@
   h1{ font-family:var(--font-display); font-weight:600; margin:0; }
   p{ margin:0; }
 
-  header{ border-bottom:1px solid var(--line); }
+  header{ position:sticky; top:0; z-index:50; background:rgba(23,24,27,0.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
   .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; gap:20px; }
   .brand{ text-decoration:none; color:var(--text-on-dark); display:flex; align-items:baseline; gap:10px; }
   .brand .mark{ font-family:var(--font-display); font-size:22px; font-weight:700; }
@@ -215,8 +221,9 @@
     </button>
     <nav class="menu-panel" id="menuPanel" aria-label="Weitere Seiten">
     <a href="index.html#ueber-uns">Über uns</a>
-    <a href="chronik.html">Chronik</a>
     <a href="index.html#aktivitaeten">Aktivitäten</a>
+    <a href="chronik.html">Chronik</a>
+    <a href="galerie.html">Galerie</a>
     <a href="jahresprogramm.html">Jahresprogramm</a>
     <a href="index.html#sammlung">Sammlung</a>
     <a href="literaturempfehlungen.html">Literaturempfehlungen</a>

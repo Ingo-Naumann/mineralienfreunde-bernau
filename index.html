@@ -6,6 +6,10 @@
 <title>Mineralienfreunde Bernau — Bezirksgruppe Bernau der VFMG</title>
 <meta name="description" content="Die Mineralienfreunde Bernau sammeln seit 1983 Mineralien, Gesteine und Fossilien. Bezirksgruppe Bernau der Vereinigung der Freunde der Mineralogie und Geologie e.V. (VFMG).">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -256,7 +260,7 @@
   .section-head h2{ font-size:clamp(28px,3.4vw,36px); }
   .section-head .note{
     color:var(--text-on-dark-dim);
-    max-width:38ch;
+    max-width:57ch;
     font-size:15px;
   }
 
@@ -328,11 +332,20 @@
   .carousel-wrap::before{
     left:0;
     background:linear-gradient(to right, var(--ink), rgba(23,24,27,0));
+    opacity:1;
+    transition:opacity .2s ease;
   }
   .carousel-wrap::after{
     right:0;
     background:linear-gradient(to left, var(--ink), rgba(23,24,27,0));
+    opacity:1;
+    transition:opacity .2s ease;
   }
+  .carousel-wrap.at-start::before{ opacity:0; }
+  .carousel-wrap.at-end::after{ opacity:0; }
+  .carousel-wrap.at-start .carousel-nav.prev{ opacity:0; visibility:hidden; }
+  .carousel-wrap.at-end .carousel-nav.next{ opacity:0; visibility:hidden; }
+  .carousel-nav{ transition:opacity .2s ease, visibility .2s ease, background .15s ease, transform .15s ease; }
   .carousel-nav{
     position:absolute;
     top:50%;
@@ -364,6 +377,7 @@
     padding:2px 4px 12px;
     scrollbar-width:thin;
     scrollbar-color:var(--line-strong) transparent;
+    overflow-anchor:none;
   }
   .specimen-grid::-webkit-scrollbar{ height:6px; }
   .specimen-grid::-webkit-scrollbar-thumb{ background:var(--line-strong); }
@@ -563,8 +577,9 @@
     </button>
     <nav class="menu-panel" id="menuPanel" aria-label="Weitere Seiten">
     <a href="#ueber-uns">Über uns</a>
-    <a href="chronik.html">Chronik</a>
     <a href="#aktivitaeten">Aktivitäten</a>
+    <a href="chronik.html">Chronik</a>
+    <a href="galerie.html">Galerie</a>
     <a href="jahresprogramm.html">Jahresprogramm</a>
     <a href="#sammlung">Sammlung</a>
     <a href="literaturempfehlungen.html">Literaturempfehlungen</a>
@@ -638,15 +653,16 @@
         <h2 style="margin-bottom:24px;">Über uns</h2>
         <p>Am 7. Juni 1983 trafen sich neun Steinbegeisterte im Volkskunstkabinett Am Steintor in Bernau und gründeten die Fachgruppe Mineralogie-Geologie beim Kulturbund. Zu den Gründungsmitgliedern zählten Christa und Werner Beck, Jürgen Heinrich, Gerhard Jahnke, Inge und Helmut Mieles, Erwin Pohl, Gondula Schröder und Dieter Schwarze.</p>
         <p>Nach der Wende konstituierte sich die Gruppe am 3. April 1991 als Bezirksgruppe Bernau in der Vereinigung der Freunde der Mineralogie und Geologie e.V. (VFMG) neu — Deutschlands größter und ältester Sammlervereinigung. Wir sind aktuell die einzige VFMG-Gruppe in Brandenburg, mit Mitgliedern vor allem aus der Region Barnim und dem nordöstlichen Berliner Umland.</p>
-        <p>Mehr über uns gibt es in unserer Chronik zu lesen.</p>
+        <p>Mehr über uns gibt es in unserer Chronik und Galerie zu lesen und zu sehen.</p>
         <a class="link-line" href="chronik.html" style="display:inline-block; margin-top:8px; font-family:var(--font-mono); font-size:13px; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);">Zur Chronik →</a>
+        <a class="link-line" href="galerie.html" style="display:inline-block; margin-top:8px; margin-left:20px; font-family:var(--font-mono); font-size:13px; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);">Zur Galerie →</a>
       </div>
       <div class="facts">
         <div class="fact"><span class="k">Gegründet</span><span class="v">1983</span></div>
         <div class="fact"><span class="k">Seit 1991</span><span class="v">Bezirksgruppe der VFMG</span></div>
-        <div class="fact"><span class="k">Treffen</span><span class="v">jeden 3. Sonntag im Monat</span></div>
+        <div class="fact"><span class="k">Gruppentreffen</span><span class="v">jeden 3. Sonntag im Monat</span></div>
         <div class="fact"><span class="k">Exkursionen</span><span class="v">2–3 mal mehrtägig im Jahr<br>mehrfach eintägig im Jahr</span></div>
-        <div class="fact"><span class="k">Mitgliedsbeitrag</span><span class="v">12 € / Jahr</span></div>
+        <div class="fact"><span class="k">Mitgliedsbeitrag (Gruppe)</span><span class="v">12 € / Jahr</span></div>
         <div class="fact"><span class="k">Gruppenleitung</span><span class="v">Jörg Sandig (Leiter)<br>Birger Derksen (Stellvertreter)<br>Marion Blischke (Finanzen)<br>Stefan Erbs (digitales Archiv)</span></div>
       </div>
     </div>
@@ -827,6 +843,7 @@
         const match = filter === 'alle' || cats.includes(filter);
         card.classList.toggle('hidden', !match);
       });
+      if (typeof refreshEdgeObservers === 'function') refreshEdgeObservers();
     });
   });
 
@@ -842,6 +859,43 @@
   document.getElementById('carouselNext').addEventListener('click', () => {
     grid.scrollBy({ left: scrollByCard() * 2, behavior: 'smooth' });
   });
+
+  // Verlaufseffekte und Pfeile nur zeigen, wenn in diese Richtung noch etwas zu sehen ist
+  const carouselWrap = grid.closest('.carousel-wrap');
+  const visibleSpecimens = () => Array.from(grid.querySelectorAll('.specimen:not(.hidden)'));
+
+  const firstObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      carouselWrap.classList.toggle('at-start', entry.isIntersecting);
+    });
+  }, { root: grid, threshold: 0.95 });
+
+  const lastObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      carouselWrap.classList.toggle('at-end', entry.isIntersecting);
+    });
+  }, { root: grid, threshold: 0.95 });
+
+  let observedFirst = null;
+  let observedLast = null;
+  const refreshEdgeObservers = () => {
+    const items = visibleSpecimens();
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (first !== observedFirst) {
+      if (observedFirst) firstObserver.unobserve(observedFirst);
+      firstObserver.observe(first);
+      observedFirst = first;
+    }
+    if (last !== observedLast) {
+      if (observedLast) lastObserver.unobserve(observedLast);
+      lastObserver.observe(last);
+      observedLast = last;
+    }
+  };
+  refreshEdgeObservers();
+  window.addEventListener('resize', refreshEdgeObservers);
 </script>
 
 

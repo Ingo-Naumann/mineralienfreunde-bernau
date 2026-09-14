@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mineralienfreunde-bernau.de/sitemap.xml

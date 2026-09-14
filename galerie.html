@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Impressum — Mineralienfreunde Bernau</title>
-<meta name="description" content="Impressum der Mineralienfreunde Bernau, Bezirksgruppe der VFMG e.V.">
+<title>Galerie — Mineralienfreunde Bernau</title>
+<meta name="description" content="Fotos aus dem Vereinsleben der Mineralienfreunde Bernau — von Exkursionen, Gruppentreffen und Marktauftritten.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -16,6 +16,7 @@
   :root{
     --ink:#2E0F1C;
     --paper:#EFDFB8;
+    --paper-dim:#C7A98A;
     --text-on-dark:#EFDFB8;
     --text-on-dark-dim:#C7A98A;
     --text-on-paper:#2E0F1C;
@@ -28,14 +29,14 @@
     --font-mono:'IBM Plex Mono', monospace;
   }
   *{ box-sizing:border-box; }
-  body{ margin:0; background:var(--ink); color:var(--text-on-dark); font-family:var(--font-body); font-size:16px; line-height:1.7; -webkit-font-smoothing:antialiased; }
-  a{ color:var(--gold); } img,svg{ display:block; max-width:100%; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } *{ transition-duration:.001ms !important; } }
+  body{ margin:0; background:var(--ink); color:var(--text-on-dark); font-family:var(--font-body); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; } img,svg{ display:block; max-width:100%; }
   :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
   .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
-  h1,h2{ font-family:var(--font-display); font-weight:600; margin:0; }
-  p{ margin:0 0 16px; }
-  ul{ margin:0 0 16px; padding-left:22px; }
-  li{ margin-bottom:6px; }
+  h1,h2,h3{ font-family:var(--font-display); font-weight:600; margin:0; letter-spacing:-0.01em; }
+  p{ margin:0; }
 
   header{ position:sticky; top:0; z-index:50; background:rgba(23,24,27,0.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
   .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; gap:20px; }
@@ -47,25 +48,67 @@
 
   .hero{ padding:64px 0 40px; border-bottom:1px solid var(--line); }
   .hero .eyebrow{ font-family:var(--font-mono); font-size:12px; color:var(--gold); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:14px; }
-  .hero h1{ font-size:clamp(32px,4.6vw,46px); line-height:1.08; margin-bottom:14px; }
-  .hero p{ font-size:15.5px; color:var(--text-on-dark-dim); }
+  .hero h1{ font-size:clamp(32px,4.6vw,48px); line-height:1.08; margin-bottom:18px; }
+  .hero p{ font-size:17px; color:var(--text-on-dark-dim); }
 
   main{ padding:56px 0 80px; }
 
-  .note-box{
-    background:var(--paper);
-    color:var(--text-on-paper);
-    padding:20px 24px;
-    margin:0 0 44px;
-    clip-path:polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
-    font-size:14.5px;
-    line-height:1.6;
+  .timeline{ border-left:1px solid var(--line-strong); margin:0; padding:0; list-style:none; }
+  .timeline li{ position:relative; padding:0 0 52px 32px; scroll-margin-top:90px; }
+  .timeline li:last-child{ padding-bottom:0; }
+  .timeline li::before{
+    content:"";
+    position:absolute; left:-7px; top:4px;
+    width:12px; height:12px; background:var(--ink);
+    border:2px solid var(--gold); border-radius:50%;
   }
-  .placeholder{ background:rgba(185,135,61,0.32); color:var(--text-on-dark); padding:1px 6px; border-radius:2px; }
-  .note-box .placeholder{ background:rgba(32,29,22,0.1); color:var(--text-on-paper); }
+  .timeline .year{ font-family:var(--font-mono); font-size:13px; color:var(--gold); display:block; margin-bottom:6px; }
+  .timeline h2{ font-size:20px; margin-bottom:12px; }
+  .timeline p{ font-size:15px; color:var(--text-on-dark-dim); }
+  .timeline p + p{ margin-top:10px; }
 
-  section + section{ margin-top:44px; padding-top:44px; border-top:1px solid var(--line); }
-  h2{ font-size:22px; margin-bottom:16px; }
+  .photo-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:12px; }
+  .photo-row figure{ margin:0; flex:0 1 260px; min-width:220px; max-width:320px; }
+  .photo-row img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    clip-path:polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  }
+  .photo-row figcaption{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--text-on-dark-dim);
+    margin-top:8px;
+  }
+  @media (max-width:640px){
+    .photo-row img{ height:200px; }
+  }
+
+  .year-nav{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:4px 4px 20px;
+    margin-bottom:36px;
+    border-bottom:1px solid var(--line);
+    scrollbar-width:thin;
+    scrollbar-color:var(--line-strong) transparent;
+  }
+  .year-nav::-webkit-scrollbar{ height:5px; }
+  .year-nav::-webkit-scrollbar-thumb{ background:var(--line-strong); }
+  .year-nav a{
+    flex:0 0 auto;
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--text-on-dark-dim);
+    text-decoration:none;
+    padding:8px 15px;
+    border:1px solid var(--line-strong);
+    white-space:nowrap;
+    transition:all .15s ease;
+  }
+  .year-nav a:hover{ border-color:var(--gold); color:var(--gold); }
 
 
   footer{ border-top:1px solid var(--line); padding:34px 0; }
@@ -140,10 +183,6 @@
     z-index:90;
   }
   .menu-panel.open{ display:flex; }
-  .menu-panel .mlabel{
-    font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--text-on-paper-dim); margin-bottom:4px;
-  }
   .menu-panel a{ color:var(--text-on-paper); text-decoration:none; font-size:14px; border-bottom:1px solid transparent; padding-bottom:1px; }
   .menu-panel a:hover{ border-color:var(--text-on-paper-dim); }
 
@@ -168,12 +207,12 @@
     <a href="index.html#ueber-uns">Über uns</a>
     <a href="index.html#aktivitaeten">Aktivitäten</a>
     <a href="chronik.html">Chronik</a>
-    <a href="galerie.html">Galerie</a>
     <a href="jahresprogramm.html">Jahresprogramm</a>
     <a href="index.html#sammlung">Sammlung</a>
     <a href="literaturempfehlungen.html">Literaturempfehlungen</a>
     <a href="index.html#kontakt">Kontakt</a>
     <a href="datenschutz.html">Datenschutz</a>
+    <a href="impressum.html">Impressum</a>
     <a href="login.html">Login</a>
     </nav>
   </div>
@@ -183,51 +222,93 @@
 
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow">Rechtliches</span>
-    <h1>Impressum</h1>
-    <p>Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG). Für die Datenschutzerklärung siehe die <a href="datenschutz.html">separate Seite</a>.</p>
+    <span class="eyebrow">Aus unserem Vereinsleben</span>
+    <h1>Galerie</h1>
+    <p>Eindrücke von Exkursionen, Gruppentreffen und Marktauftritten</p>
   </div>
 </section>
 
 <main class="wrap">
-
-  <div class="note-box">
-    Diese Seite enthält an mehreren Stellen <span class="placeholder">gelb markierte Platzhalter</span>. Bitte vor Veröffentlichung durch die tatsächlichen Angaben ersetzen und im Zweifel von einer sachkundigen Stelle (z. B. dem VFMG-Vorstand oder einer Rechtsberatung) prüfen lassen — dieser Text ist eine Vorlage, keine Rechtsberatung.
-  </div>
-
-  <section>
-    <p>
-      <span class="placeholder">Vereinigung der Freunde der Mineralogie und Geologie e.V. (VFMG)</span><br>
-      Bezirksgruppe Bernau<br>
-      <span class="placeholder">Straße Hausnummer</span><br>
-      <span class="placeholder">PLZ Ort</span>
-    </p>
-
-    <p><strong>Vertreten durch:</strong><br>
-    <span class="placeholder">Name der/des Vorsitzenden bzw. gesetzlichen Vertreters/Vertreterin gemäß Satzung</span></p>
-
-    <p><strong>Kontakt:</strong><br>
-    E-Mail: <a href="mailto:bg.bernau-b-berlin@vfmg.de">bg.bernau-b-berlin@vfmg.de</a><br>
-    Telefon: <span class="placeholder">optional, aber empfohlen</span></p>
-
-    <p><strong>Registereintrag:</strong><br>
-    Die VFMG e.V. ist im Vereinsregister eingetragen.<br>
-    Registergericht: <span class="placeholder">z. B. Amtsgericht Heidelberg</span><br>
-    Registernummer: <span class="placeholder">VR-Nummer</span></p>
-
-    <p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 Medienstaatsvertrag (MStV):</strong><br>
-    <span class="placeholder">Name, Anschrift wie oben</span></p>
-
-    <p style="color:var(--text-on-dark-dim); font-size:14px; margin-top:32px;">Stand: <span class="placeholder">Datum einfügen</span></p>
-  </section>
-
+  <nav class="year-nav" aria-label="Zu einem Jahr springen">
+    <a href="#g2024">2024</a>
+    <a href="#g2023a">2023</a>
+    <a href="#g2022">2022</a>
+    <a href="#g2020">2020</a>
+    <a href="#g2019">2019</a>
+    <a href="#g2005">2005</a>
+  </nav>
+  <ol class="timeline">
+    <li id="g2024">
+      <span class="year">2024</span>
+      <h2>Gruppentreffen im Februar</h2>
+      <div class="photo-row">
+        <figure>
+          <img src="gallery/2024-gruppentreffen.jpg" alt="Gruppentreffen der Mineralienfreunde Bernau im Februar 2024, Vortrag mit Mineralienfotos an der Wand">
+        </figure>
+      </div>
+    </li>
+    <li id="g2023a">
+      <span class="year">2023</span>
+      <h2>40-jähriges Jubiläum</h2>
+      <div class="photo-row">
+        <figure>
+          <img src="gallery/2023-jubilaeum.jpg" alt="Werner Beck berichtet beim Gruppentreffen im Juni 2023 über die Gründung der Mineralienfreunde Bernau">
+        </figure>
+        <figure>
+          <img src="gallery/2023-ehrenurkunde.jpg" alt="Werner Beck erhält im April 2023 die Ehrenurkunde der Stadt Bernau für sein langjähriges Ehrenamt">
+        </figure>
+        <figure>
+          <img src="gallery/2023-tauschtag.jpg" alt="Tauschtag der sächsischen Achatsammler in der Jugendherberge Hormersdorf im März 2023">
+        </figure>
+      </div>
+    </li>
+    <li id="g2022">
+      <span class="year">2022</span>
+      <h2>Tag der Vereine in Bernau</h2>
+      <div class="photo-row">
+        <figure>
+          <img src="gallery/2022-tagdervereine-a.jpg" alt="Werner Beck im Gespräch mit Bürgermeister André Stahl am Stand der Mineralienfreunde Bernau, August 2022">
+        </figure>
+        <figure>
+          <img src="gallery/2022-tagdervereine-b.jpg" alt="Interessierte Besucherinnen und Besucher am Stand der Mineralienfreunde Bernau beim Tag der Vereine 2022">
+        </figure>
+      </div>
+    </li>
+    <li id="g2020">
+      <span class="year">2020</span>
+      <h2>Achatsuche im Steinbruch</h2>
+      <div class="photo-row">
+        <figure>
+          <img src="gallery/2020-achatsuche.jpg" alt="Achatsuche im Steinbruch Röthenbacher Berg im Jahr 2020">
+        </figure>
+      </div>
+    </li>
+    <li id="g2019">
+      <span class="year">2019</span>
+      <h2>Besuch der Mineralogischen Sammlungen Dresden</h2>
+      <div class="photo-row">
+        <figure>
+          <img src="gallery/2019-dresden.jpg" alt="Mitglieder der Mineralienfreunde Bernau besichtigen im November 2019 die Mineralogischen Sammlungen Dresden">
+        </figure>
+      </div>
+    </li>
+    <li id="g2005">
+      <span class="year">2005</span>
+      <h2>Ausstellung im Museumspark Rüdersdorf</h2>
+      <div class="photo-row">
+        <figure>
+          <img src="gallery/2005-ruedersdorf.jpg" alt="Plakat der Mineralienausstellung „Selbstgesammelte Schätze aus aller Welt“ im Museumspark Rüdersdorf, 2005">
+        </figure>
+      </div>
+    </li>
+  </ol>
 </main>
 
 <footer>
   <div class="wrap">
     <div class="foot-row">
     <div class="brand-line">&copy; <span id="copyYear">2026</span> <strong>Mineralienfreunde Bernau</strong> – Bezirksgruppe Bernau der VFMG e.V.</div>
-    <div class="fine">bg.bernau-b-berlin@vfmg.de · <a href="https://vfmg.de/bezirksgruppen/bezirksgruppen-in-brandenburg">vfmg.de</a> · <a href="datenschutz.html">Datenschutz</a></div>
+    <div class="fine">bg.bernau-b-berlin@vfmg.de · <a href="https://vfmg.de/bezirksgruppen/bezirksgruppen-in-brandenburg">vfmg.de</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div>
     </div>
   </div>
 </footer>
