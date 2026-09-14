@@ -57,7 +57,7 @@
   .hero h1{ font-size:clamp(32px,4.6vw,48px); line-height:1.08; margin-bottom:18px; }
   .hero p{ font-size:17px; color:var(--text-on-dark-dim); }
 
-  main{ padding:56px 0 80px; }
+  main.wrap{ padding-top:10px; padding-bottom:80px; }
 
   .lit-item{
     display:grid;
@@ -136,17 +136,53 @@
       top:50%;
       right:24px;
       transform:translateY(-50%);
+      flex-direction:row;
+      align-items:stretch;
+      gap:0;
+      z-index:70;
+    }
+    .filters-fixed .filter-label{
+      margin:0;
+      writing-mode:vertical-rl;
+      text-orientation:mixed;
+      padding:14px 8px;
+      cursor:default;
+      background:var(--gold);
+      color:#2E0F1C;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      clip-path:polygon(0 10px, 10px 0, 100% 0, 100% 100%, 0 100%);
+      transition:background .15s ease;
+    }
+    .filters-fixed:hover .filter-label,
+    .filters-fixed:focus-within .filter-label{
+      background:#D6AC64;
+    }
+    .filters-fixed .filter-buttons{
+      display:flex;
       flex-direction:column;
       align-items:flex-end;
       gap:8px;
-      z-index:70;
+      max-width:0;
+      opacity:0;
+      overflow:hidden;
+      pointer-events:none;
+      transition:max-width .3s ease, opacity .2s ease .05s, margin-right .3s ease;
+      margin-right:0;
     }
-    .filters-fixed .filter-label{ margin:0 0 6px; }
-    .filters-fixed .filter-label,
+    .filters-fixed:hover .filter-buttons,
+    .filters-fixed:focus-within .filter-buttons{
+      max-width:200px;
+      opacity:1;
+      pointer-events:auto;
+      margin-right:12px;
+    }
     .filters-fixed .filter-btn{
-      writing-mode:vertical-rl;
-      text-orientation:mixed;
-      padding:14px 7px;
+      align-self:stretch;
+      text-align:center;
+      white-space:nowrap;
     }
   }
   .filter-btn{
@@ -266,7 +302,61 @@
   .menu-panel a{ color:var(--text-on-paper); text-decoration:none; font-size:14px; border-bottom:1px solid transparent; padding-bottom:1px; }
   .menu-panel a:hover{ border-color:var(--text-on-paper-dim); }
 
-  .nav-right{ display:flex; align-items:center; gap:28px; }
+  .nav-right{ display:flex; align-items:center; gap:28px; }  .cover-lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(23,15,17,0.86);
+    backdrop-filter:blur(4px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+    padding:40px 20px;
+    cursor:zoom-out;
+  }
+  .cover-lightbox.open{ display:flex; }
+  .cover-lightbox img{
+    max-width:min(420px, 90vw);
+    max-height:85vh;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    clip-path:polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  }
+  .cover-lightbox .lb-close{
+    position:absolute;
+    top:22px;
+    right:26px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    color:var(--text-on-dark);
+    font-size:20px;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .cover-lightbox .lb-close:hover{ border-color:var(--gold); color:var(--gold); }
+
+  .cover-trigger{ position:relative; display:inline-block; }
+  .cover-trigger .zoom-hint{
+    position:absolute;
+    right:-6px;
+    bottom:-6px;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#2E0F1C;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 3px 8px rgba(0,0,0,0.35);
+    pointer-events:none;
+  }
+  .cover-trigger .zoom-hint svg{ width:14px; height:14px; }
 </style>
 </head>
 <body>
@@ -309,12 +399,15 @@
 
 <main class="wrap">
 
-  <div class="lit-item">
-    <img src="buchcover.png" alt="Buchcover „Unser Hobby: Mineralien, Gesteine und Fossilien“" style="width:120px; height:auto; align-self:start;">
+  <div class="lit-item" style="gap:13px;">
+    <button type="button" class="cover-trigger" id="coverTrigger" style="all:unset; cursor:zoom-in; position:relative; display:inline-block; align-self:start; justify-self:start; margin-top:8px;" aria-label="Buchcover vergrößert anzeigen">
+    <img src="buchcover.jpg" alt="Buchcover „Unser Hobby: Mineralien, Gesteine und Fossilien“" style="width:120px; height:auto; align-self:start;">
+    <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="19" y1="19" x2="15.2" y2="15.2"/></svg></span>
+    </button>
     <div>
       <h2>Unser Hobby: Mineralien, Gesteine und Fossilien<span class="subtitle">Erfahrungen der Mineralienfreunde Bernau</span></h2>
       <div class="byline">Mineralienfreunde Bernau (2026) · res publica Wissenschaftsverlag · ISBN 978-3-95968-143-8</div>
-      <p class="desc">Unser eigenes Buch mit Erfahrungen, Fundstücken und Anekdoten aus vier Jahrzehnten Vereinsgeschichte — erscheint in Kürze.</p>
+      <p class="desc">Das Buch gibt eine einfache Anleitung, wie man sich unserem Hobby widmen und es mit viel Freude ausüben kann. Es ist Werbung für unsere Passion, von dem Wunsch getragen, es anderen näherzubringen. Ein Buch für alle, die sich bereits für Steine und Fossilien interessieren oder es bald mit Begeisterung tun werden.</p>
       <a class="link-line" href="https://www.respublica-verlag.de/werke-sachliteratur/978-3-95968-143-8" target="_blank" rel="noopener">Bestellen →</a>
     </div>
   </div>
@@ -333,12 +426,14 @@
   </div>
 
   <div class="filters-fixed" role="group" aria-label="Nach Sammelgebiet filtern">
-    <span class="filter-label">Filter</span>
+    <div class="filter-buttons">
     <button class="filter-btn active" data-filter="alle">Alle</button>
     <button class="filter-btn" data-filter="mineralien">Mineralien</button>
     <button class="filter-btn" data-filter="gesteine">Gesteine</button>
     <button class="filter-btn" data-filter="fossilien">Fossilien</button>
     <button class="filter-btn" data-filter="bearbeitung">Bearbeitung</button>
+    </div>
+    <span class="filter-label">Filter</span>
   </div>
 
     <div class="lit-item" data-cat="mineralien">
@@ -633,8 +728,8 @@
       <span class="lit-tag cat-fossilien">Fossilien</span>
       <div>
         <h3>Fossilien am Ostseestrand</h3>
-        <div class="byline">Reinicke, Rolf (2024) &middot; 3. Auflage &middot; Demmler Verlag</div>
-        <div class="isbn-pending">ISBN: 978-3-944102-36-8 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
+        <div class="byline">Reinicke, Rolf (2025) &middot; 3. Auflage &middot; Demmler Verlag</div>
+        <div class="isbn-pending">ISBN: 978-3-944102-68-9 <span class="status status-buchhandel">Buchhandel erhältlich</span></div>
       </div>
     </div>
 
@@ -932,6 +1027,30 @@
         panel.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
       }
+    });
+  })();
+</script>
+
+<div class="cover-lightbox" id="coverLightbox" role="dialog" aria-modal="true" aria-label="Buchcover vergrößert">
+  <button type="button" class="lb-close" id="coverLightboxClose" aria-label="Schließen">&times;</button>
+  <img src="buchcover-gross.jpg" alt="Buchcover „Unser Hobby: Mineralien, Gesteine und Fossilien“ in vergrößerter Ansicht">
+</div>
+
+<script>
+  (function(){
+    var trigger = document.getElementById('coverTrigger');
+    var lightbox = document.getElementById('coverLightbox');
+    var closeBtn = document.getElementById('coverLightboxClose');
+    if(!trigger || !lightbox || !closeBtn) return;
+    var open = function(){ lightbox.classList.add('open'); };
+    var close = function(){ lightbox.classList.remove('open'); };
+    trigger.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', function(e){
+      if(e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') close();
     });
   })();
 </script>

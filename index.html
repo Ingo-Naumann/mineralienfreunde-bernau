@@ -156,14 +156,74 @@
     display:block;
   }
   .book-banner h3{ font-size:19px; margin-bottom:4px; }
-  .book-banner p{ font-size:14.5px; color:var(--text-on-paper-dim); max-width:52ch; }
+  .book-banner h3 .subtitle{ display:block; font-family:var(--font-body); font-weight:700; font-size:14px; color:var(--text-on-paper-dim); margin-top:2px; }
+  .book-banner p{ font-size:14.5px; color:var(--text-on-paper-dim); }
   .book-banner .cover{
     flex-shrink:0;
-    width:96px;
+    width:130px;
     box-shadow:0 6px 18px rgba(0,0,0,0.28);
     clip-path:polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+    cursor:zoom-in;
+    transition:transform .15s ease;
   }
+  .book-banner .cover:hover{ transform:translateY(-2px); }
   .book-banner .book-text{ flex:1; min-width:220px; }
+
+  .cover-lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(23,15,17,0.86);
+    backdrop-filter:blur(4px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+    padding:40px 20px;
+    cursor:zoom-out;
+  }
+  .cover-lightbox.open{ display:flex; }
+  .cover-lightbox img{
+    max-width:min(420px, 90vw);
+    max-height:85vh;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    clip-path:polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  }
+  .cover-lightbox .lb-close{
+    position:absolute;
+    top:22px;
+    right:26px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    color:var(--text-on-dark);
+    font-size:20px;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .cover-lightbox .lb-close:hover{ border-color:var(--gold); color:var(--gold); }
+
+  .cover-trigger{ position:relative; display:inline-block; }
+  .cover-trigger .zoom-hint{
+    position:absolute;
+    right:-6px;
+    bottom:-6px;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#2E0F1C;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 3px 8px rgba(0,0,0,0.35);
+    pointer-events:none;
+  }
+  .cover-trigger .zoom-hint svg{ width:14px; height:14px; }
 
   .kontakt-card{
     background:var(--paper);
@@ -636,11 +696,14 @@
   <!-- Buchhinweis -->
   <div class="wrap" style="padding:0 28px 0;">
     <div class="book-banner">
-      <img class="cover" src="buchcover.png" alt="Buchcover „Unser Hobby: Mineralien, Gesteine und Fossilien“, herausgegeben von den Mineralienfreunden Bernau">
+      <button type="button" class="cover-trigger" id="coverTrigger" style="all:unset; cursor:zoom-in; flex-shrink:0; position:relative; display:inline-block;" aria-label="Buchcover vergrößert anzeigen">
+      <img class="cover" src="buchcover.jpg" alt="Buchcover „Unser Hobby: Mineralien, Gesteine und Fossilien“, herausgegeben von den Mineralienfreunden Bernau">
+      <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="19" y1="19" x2="15.2" y2="15.2"/></svg></span>
+      </button>
       <div class="book-text">
-        <span class="tag-label">In Vorbereitung</span>
-        <h3>„Unser Hobby: Mineralien, Gesteine und Fossilien“</h3>
-        <p>In Kürze erscheint unser Buch mit Erfahrungen, Fundstücken und Anekdoten aus vier Jahrzehnten Vereinsgeschichte, herausgegeben im res publica Wissenschaftsverlag.</p>
+        <span class="tag-label">Unser eigenes Buch</span>
+        <h3>„Unser Hobby: Mineralien, Gesteine und Fossilien“<span class="subtitle">Erfahrungen der Mineralienfreunde Bernau</span></h3>
+        <p>Das Buch gibt eine einfache Anleitung, wie man sich unserem Hobby widmen und es mit viel Freude ausüben kann. Es ist Werbung für unsere Passion, von dem Wunsch getragen, es anderen näherzubringen. Ein Buch für alle, die sich bereits für Steine und Fossilien interessieren oder es bald mit Begeisterung tun werden.</p>
       </div>
       <a href="https://www.respublica-verlag.de/werke-sachliteratur/978-3-95968-143-8" target="_blank" rel="noopener" class="btn btn-ghost" style="border-color:var(--text-on-paper-dim); color:var(--text-on-paper);">Mehr erfahren</a>
     </div>
@@ -899,6 +962,11 @@
 </script>
 
 
+<div class="cover-lightbox" id="coverLightbox" role="dialog" aria-modal="true" aria-label="Buchcover vergrößert">
+  <button type="button" class="lb-close" id="coverLightboxClose" aria-label="Schließen">&times;</button>
+  <img src="buchcover-gross.jpg" alt="Buchcover „Unser Hobby: Mineralien, Gesteine und Fossilien“ in vergrößerter Ansicht">
+</div>
+
 <button class="back-to-top" id="backToTop" type="button" aria-label="Nach oben springen">&uarr;</button>
 
 <script>
@@ -942,6 +1010,25 @@
         panel.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
       }
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    var trigger = document.getElementById('coverTrigger');
+    var lightbox = document.getElementById('coverLightbox');
+    var closeBtn = document.getElementById('coverLightboxClose');
+    if(!trigger || !lightbox || !closeBtn) return;
+    var open = function(){ lightbox.classList.add('open'); };
+    var close = function(){ lightbox.classList.remove('open'); };
+    trigger.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', function(e){
+      if(e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') close();
     });
   })();
 </script>
