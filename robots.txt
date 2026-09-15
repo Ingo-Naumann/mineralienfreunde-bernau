@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /login.html
+Disallow: /gruppentreffen.html
+Disallow: /steckbriefe.html
+Disallow: /vortraege.html
 
 Sitemap: https://mineralienfreunde-bernau.de/sitemap.xml

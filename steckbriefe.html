@@ -25,6 +25,7 @@
     --malachite:#7FA07A;
     --azurite:#7A93B0;
     --cinnabar:#B0714A;
+    --sulfur:#C9A227;
     --line:rgba(185,135,61,0.20);
     --line-strong:rgba(185,135,61,0.38);
     --font-display:'Fraunces', serif;
@@ -73,7 +74,7 @@
 
   .toolbar{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; margin:24px 0 28px; scroll-margin-top:90px; }
 
-  .filters{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .filters{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; scroll-margin-top:90px; }
   .filters .filter-label,.filters-fixed .filter-label{ font-family:var(--font-mono); font-size:12px; color:var(--text-on-dark-dim); text-transform:uppercase; letter-spacing:.05em; margin-right:2px; }
 
   .filters-fixed{ display:none; }
@@ -152,6 +153,8 @@
   .filter-btn[data-filter="gesteine"].active{ background:var(--malachite); color:#fff; border-color:var(--malachite); }
   .filter-btn[data-filter="fossilien"]{ border-color:var(--cinnabar); }
   .filter-btn[data-filter="fossilien"].active{ background:var(--cinnabar); color:#fff; border-color:var(--cinnabar); }
+  .filter-btn[data-filter="grundlagen"]{ border-color:var(--sulfur); }
+  .filter-btn[data-filter="grundlagen"].active{ background:var(--sulfur); color:#2E0F1C; border-color:var(--sulfur); }
 
   .sort-control{ display:flex; align-items:center; gap:8px; }
   .sort-control label{ font-family:var(--font-mono); font-size:12px; color:var(--text-on-dark-dim); text-transform:uppercase; letter-spacing:.05em; }
@@ -185,9 +188,20 @@
   .steckbrief-tag.cat-mineralien{ background:var(--azurite); }
   .steckbrief-tag.cat-gesteine{ background:var(--malachite); }
   .steckbrief-tag.cat-fossilien{ background:var(--cinnabar); }
+  .steckbrief-tag.cat-grundlagen{ background:var(--sulfur); color:#2E0F1C; }
   .steckbrief-card .name{ font-size:17px; margin-bottom:6px; }
   .steckbrief-card .rolle{ font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--gold); display:block; margin-bottom:10px; }
   .steckbrief-card p{ font-size:14px; color:var(--text-on-dark-dim); }
+  .steckbrief-card .pdf-link{
+    display:inline-block;
+    margin-top:12px;
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--gold);
+    text-decoration:none;
+    border-bottom:1px solid var(--line-strong);
+  }
+  .steckbrief-card .pdf-link:hover{ border-color:var(--gold); }
 
   .gate{ padding:64px 0; text-align:center; }
   .gate p{ color:var(--text-on-dark-dim); font-size:15px; margin-bottom:20px; }
@@ -345,6 +359,7 @@
         <button class="filter-btn" data-filter="mineralien">Mineralien</button>
         <button class="filter-btn" data-filter="gesteine">Gesteine</button>
         <button class="filter-btn" data-filter="fossilien">Fossilien</button>
+        <button class="filter-btn" data-filter="grundlagen">Grundlagen</button>
       </div>
       <div class="sort-control">
         <label for="sortSelect">Sortieren</label>
@@ -361,28 +376,180 @@
         <button class="filter-btn" data-filter="mineralien">Mineralien</button>
         <button class="filter-btn" data-filter="gesteine">Gesteine</button>
         <button class="filter-btn" data-filter="fossilien">Fossilien</button>
+        <button class="filter-btn" data-filter="grundlagen">Grundlagen</button>
       </div>
       <span class="filter-label">Filter</span>
     </div>
 
     <div class="steckbrief-grid" id="steckbriefGrid">
-      <div class="steckbrief-card" data-cat="mineralien" data-name="Amethyst">
+      <!-- Bilder zu den Steckbriefen liegen künftig im Ordner "profiles", z. B. profiles/amethyst.jpg -->
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Achat">
         <span class="steckbrief-tag cat-mineralien">Mineralien</span>
-        <div class="name">Amethyst</div>
-        <span class="rolle">Platzhalter-Eintrag</span>
-        <p>Merkmale, Fundorte und Fotos folgen — Beispiel-Eintrag zur Vorschau von Filter und Sortierung.</p>
+        <div class="name">Achat</div>
+        <span class="rolle">Härte 6,5–7</span>
+        <p>Mikrokristallines Quarzaggregat (SiO₂) mit lagigem, farbig gebändertem Bau. Hier speziell die Festungsachate des Osterzgebirges behandelt, deren Bänder charakteristische, scharfkantige Formen zeigen.</p>
+        <a class="pdf-link" href="profiles/minerals/Achat.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
       </div>
-      <div class="steckbrief-card" data-cat="gesteine" data-name="Granit">
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Anhydrit">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Anhydrit</div>
+        <span class="rolle">Härte 3,5</span>
+        <p>CaSO₄, orthorhombisch, meist farblos bis bläulich oder rötlich. Entsteht aus Gips durch Wasserentzug; in Brandenburg nur durch Bohrungen in Zechsteinablagerungen nachgewiesen.</p>
+        <a class="pdf-link" href="profiles/minerals/Anhydrit.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Apatit">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Apatit</div>
+        <span class="rolle">Härte 5</span>
+        <p>Sammelbezeichnung für eine Gruppe chemisch ähnlicher Phosphatminerale (v. a. Fluor-, Chlor- und Hydroxylapatit), vielfarbig. Häufig, u. a. als Phosphorit in Sedimenten und in den Zinnlagerstätten des Erzgebirges.</p>
+        <a class="pdf-link" href="profiles/minerals/Apatit.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Aragonit">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Aragonit</div>
+        <span class="rolle">Härte 3,5–4</span>
+        <p>Orthorhombische Varietät des Calciumcarbonats (CaCO₃), unter Normalbedingungen metastabil und wandelt sich allmählich in Calcit um. Hauptbestandteil von Korallenskeletten und Perlen.</p>
+        <a class="pdf-link" href="profiles/minerals/Aragonit.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Baryt">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Baryt (Schwerspat)</div>
+        <span class="rolle">Härte 3–3,5</span>
+        <p>BaSO₄, orthorhombisch, oft tafeliger Habitus. Bildung in Sedimenten und Ganglagerstätten; als Bohrspülmittel, Röntgenkontrastmittel und Füllstoff für Papier genutzt.</p>
+        <a class="pdf-link" href="profiles/minerals/Baryt.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Beryll">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Beryll</div>
+        <span class="rolle">Härte 7,5–8</span>
+        <p>Al₂Be₃(Si₆O₁₈), hexagonal, magmatisch in Pegmatit und Granit gebildet. Tritt in bekannten Varietäten wie Aquamarin, Smaragd, Morganit und Heliodor auf.</p>
+        <a class="pdf-link" href="profiles/minerals/Beryll.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Calcit">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Calcit</div>
+        <span class="rolle">Härte 3</span>
+        <p>CaCO₃, trigonal, eines der häufigsten Minerale überhaupt, mit charakteristischer Doppelbrechung. Hauptbestandteil vieler Fossilien; in Brandenburg besonders in Rüdersdorf.</p>
+        <a class="pdf-link" href="profiles/minerals/Calcit.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Gips">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Gips (Selenit)</div>
+        <span class="rolle">Härte 1,5–2</span>
+        <p>CaSO₄ · 2H₂O, monoklin und sehr weich. Entsteht aus wässrigen Lösungen oder durch Wasseraufnahme aus Anhydrit; in Brandenburg u. a. in Tonvorkommen bei Bad Freienwalde.</p>
+        <a class="pdf-link" href="profiles/minerals/Gips.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Glimmergruppe">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Glimmergruppe</div>
+        <span class="rolle">Mineralgruppe</span>
+        <p>Gruppe plattig-blättriger Schichtsilikate (u. a. Muskovit, Biotit, Glaukonit) — die vierthäufigste gesteinsbildende Mineralgruppe der Erdkruste. Vielseitig genutzt, u. a. in der Elektro- und Kosmetikindustrie.</p>
+        <a class="pdf-link" href="profiles/minerals/Glimmer.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Granat">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Granat</div>
+        <span class="rolle">Härte 6,5–7,5</span>
+        <p>Gruppe chemisch ähnlicher Inselsilikate mit ca. 15 Mineralien und Varietäten (u. a. Pyrop, Almandin, Grossular, Uwarowit). Seit der Bronzezeit als Schmuckstein, heute auch als Schleifmittel genutzt.</p>
+        <a class="pdf-link" href="profiles/minerals/Granat.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Haüyn">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Haüyn (Hauyn)</div>
+        <span class="rolle">Härte 5,5–6</span>
+        <p>Natrium-Calcium-Alumosilikat der Sodalithgruppe, meist intensiv blau bis himmelblau. Entsteht in alkalischen Vulkaniten wie Phonolith und Trachyt, u. a. in der Eifel und am Kaiserstuhl.</p>
+        <a class="pdf-link" href="profiles/minerals/Hauyn.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Markasit">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Markasit</div>
+        <span class="rolle">Härte 6–6,5</span>
+        <p>FeS₂, gelbmetallisch bis bronzefarben, orthorhombisch. Bildet sich hydrothermal oder sedimentär aus organischen Resten und wandelt sich bei steigendem pH-Wert und steigender Temperatur in Pyrit um.</p>
+        <a class="pdf-link" href="profiles/minerals/Markasit.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Olivin">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Olivin</div>
+        <span class="rolle">Härte 6–7</span>
+        <p>(Mg,Fe)₂[SiO₄], Inselsilikat und Hauptbestandteil des Erdmantelgesteins Peridotit. Die hellgrüne, als Schmuckstein geeignete Varietät ist als Peridot oder Chrysolith bekannt.</p>
+        <a class="pdf-link" href="profiles/minerals/Olivin.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Pyrit">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Pyrit</div>
+        <span class="rolle">Härte 6–6,5</span>
+        <p>FeS₂, messinggelb metallisch glänzend, kubisch. Magmatisch, vulkanisch, hydrothermal oder sedimentär gebildet; weltweit häufig, in Brandenburg u. a. in Rüdersdorf.</p>
+        <a class="pdf-link" href="profiles/minerals/Pyrit.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Rhodochrosit">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Rhodochrosit</div>
+        <span class="rolle">Härte 3,5–4</span>
+        <p>Trigonales Carbonatmineral in Rosa- bis Rottönen, entstanden in Hydrothermaladern und metamorphen Gesteinen. Nicht in Brandenburg vorkommend, aber u. a. in Freiberg/Sachsen, Peru, USA und Mexiko.</p>
+        <a class="pdf-link" href="profiles/minerals/Rhodochrosit.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="mineralien" data-name="Topas">
+        <span class="steckbrief-tag cat-mineralien">Mineralien</span>
+        <div class="name">Topas</div>
+        <span class="rolle">Härte 8</span>
+        <p>Al₂SiO₄(F,OH)₂, orthorhombisch und mit Härte 8 eines der härteren Schmucksteinminerale. Bildung in Pegmatiten und Seifen; Vorkommen u. a. im Vogtland.</p>
+        <a class="pdf-link" href="profiles/minerals/Topas.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="gesteine" data-name="Gnandsteiner Bandjaspis">
         <span class="steckbrief-tag cat-gesteine">Gesteine</span>
-        <div class="name">Granit</div>
-        <span class="rolle">Platzhalter-Eintrag</span>
-        <p>Merkmale, Fundorte und Fotos folgen — Beispiel-Eintrag zur Vorschau von Filter und Sortierung.</p>
+        <div class="name">Gnandsteiner Bandjaspis</div>
+        <span class="rolle">Eruptivgestein</span>
+        <p>Sehr feinkörniger, stark verkieselter Tuff aus dem Rotliegenden (ca. 290–300 Mio. Jahre) — trotz des Namens kein echter Jaspis. Fundort: Wald Stöckigt zwischen Gnandstein und Frohburg (Sachsen).</p>
+        <a class="pdf-link" href="profiles/rocks/Bandjaspis.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
       </div>
-      <div class="steckbrief-card" data-cat="fossilien" data-name="Ammonit">
+      <div class="steckbrief-card" data-cat="gesteine" data-name="Graptolithengestein">
+        <span class="steckbrief-tag cat-gesteine">Gesteine</span>
+        <div class="name">Grünlich-graues Graptolithengestein</div>
+        <span class="rolle">Geschiebe</span>
+        <p>Faust- bis kopfgroße Mergelkonkretionen aus dem Silur (ca. 425–430 Mio. Jahre), reich an Graptolithen und weiteren Fossilien. Vermutlich aus der westlichen Ostsee, häufig als Geschiebe nördlich der Linie Hamburg–Leipzig–Danzig.</p>
+        <a class="pdf-link" href="profiles/rocks/Graptolithengestein.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="gesteine" data-name="Obsidian">
+        <span class="steckbrief-tag cat-gesteine">Gesteine</span>
+        <div class="name">Obsidian</div>
+        <span class="rolle">Eruptivgestein</span>
+        <p>Natürliches vulkanisches Glasgestein mit amorphem Gefüge, entstanden durch rasche Abkühlung SiO₂-reicher Lava. Meist schwarz, grau, braun oder grün gefärbt, mit ausgeprägtem Glasglanz und muscheligem Bruch.</p>
+        <a class="pdf-link" href="profiles/rocks/Obsidian.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="gesteine" data-name="Rhombenporphyr">
+        <span class="steckbrief-tag cat-gesteine">Gesteine</span>
+        <div class="name">Rhombenporphyr</div>
+        <span class="rolle">Eruptivgestein</span>
+        <p>Eruptivgestein mit charakteristischen, rhomben- oder schiffchenförmigen Feldspatkristallen in feinkörniger Grundmasse. Stammt ursprünglich aus dem Oslograben (Perm) und gilt als wichtiges Leitgeschiebe zur Rekonstruktion eiszeitlicher Eisbewegungen.</p>
+        <a class="pdf-link" href="profiles/rocks/Rhombenporphyr.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="gesteine" data-name="Sedimentgesteine">
+        <span class="steckbrief-tag cat-gesteine">Gesteine</span>
+        <div class="name">Sedimentgesteine (Sedimentite)</div>
+        <span class="rolle">Überblick</span>
+        <p>Überblick über Gesteine, die an der Erdoberfläche aus losem oder gelöstem Material entstehen — klastisch, chemisch oder biogen, mit charakteristischer Schichtung und häufigen Fossilfunden.</p>
+        <a class="pdf-link" href="profiles/rocks/Sedimentite.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="fossilien" data-name="Muschel oder Brachiopode">
         <span class="steckbrief-tag cat-fossilien">Fossilien</span>
-        <div class="name">Ammonit</div>
-        <span class="rolle">Platzhalter-Eintrag</span>
-        <p>Merkmale, Fundorte und Fotos folgen — Beispiel-Eintrag zur Vorschau von Filter und Sortierung.</p>
+        <div class="name">Muschel oder Brachiopode?</div>
+        <span class="rolle">Bestimmungshilfe</span>
+        <p>Kurzer Leitfaden zur Unterscheidung von Muscheln und Brachiopoden anhand von Merkmalen wie Schalensymmetrie, Klappenöffnung, Form und Größe — hilfreich bei der Fossilienbestimmung im Gelände.</p>
+        <a class="pdf-link" href="profiles/fossils/Brachiopoden.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="fossilien" data-name="Stromatolithen">
+        <span class="steckbrief-tag cat-fossilien">Fossilien</span>
+        <div class="name">Stromatolithen</div>
+        <span class="rolle">Älteste Lebensspuren</span>
+        <p>Feinlaminierte Sedimentstrukturen, gebildet durch mikrobielle Matten (v. a. Cyanobakterien) — zu den ältesten bekannten Lebensspuren zählend (seit ca. 3,6 Mrd. Jahren), heute nur noch in wenigen Extremlebensräumen wie der Shark Bay verbreitet.</p>
+        <a class="pdf-link" href="profiles/fossils/Stromatolithen.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
+      </div>
+      <div class="steckbrief-card" data-cat="grundlagen" data-name="Mohshärte">
+        <span class="steckbrief-tag cat-grundlagen">Grundlagen</span>
+        <div class="name">Mohs'sche Härteskala</div>
+        <span class="rolle">Bestimmungshilfe</span>
+        <p>Von Friedrich Mohs eingeführte zehnstufige Ritzhärte-Skala (Talk bis Diamant) zur Mineralbestimmung: Jedes Mineral ritzt das vorhergehende und wird vom folgenden geritzt — mit einer Vergleichssammlung lässt sich die Härte eines Fundes so relativ genau bestimmen.</p>
+        <a class="pdf-link" href="profiles/basics/Mohs.pdf" target="_blank" rel="noopener">Steckbrief herunterladen</a>
       </div>
     </div>
   </div>
@@ -419,17 +586,24 @@
       });
     });
 
-    if(sortSelect && grid){
+    function sortCards(dir){
+      if(!grid) return;
+      var sorted = Array.prototype.slice.call(cards).sort(function(a, b){
+        var an = a.dataset.name.toLowerCase();
+        var bn = b.dataset.name.toLowerCase();
+        if(an < bn) return dir === 'az' ? -1 : 1;
+        if(an > bn) return dir === 'az' ? 1 : -1;
+        return 0;
+      });
+      sorted.forEach(function(card){ grid.appendChild(card); });
+    }
+
+    // Beim Laden der Seite standardmäßig alphabetisch (A–Z) sortieren
+    sortCards('az');
+
+    if(sortSelect){
       sortSelect.addEventListener('change', function(){
-        var dir = sortSelect.value;
-        var sorted = Array.prototype.slice.call(cards).sort(function(a, b){
-          var an = a.dataset.name.toLowerCase();
-          var bn = b.dataset.name.toLowerCase();
-          if(an < bn) return dir === 'az' ? -1 : 1;
-          if(an > bn) return dir === 'az' ? 1 : -1;
-          return 0;
-        });
-        sorted.forEach(function(card){ grid.appendChild(card); });
+        sortCards(sortSelect.value);
       });
     }
   })();
