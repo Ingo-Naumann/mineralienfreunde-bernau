@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gruppentreffen — Mineralienfreunde Bernau</title>
+<meta name="description" content="Gruppentreffen der Mineralienfreunde Bernau — interner Mitgliederbereich.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2E0F1C;
+    --paper:#EFDFB8;
+    --paper-dim:#C7A98A;
+    --text-on-dark:#EFDFB8;
+    --text-on-dark-dim:#C7A98A;
+    --text-on-paper:#2E0F1C;
+    --text-on-paper-dim:#3B1626;
+    --gold:#B9873D;
+    --line:rgba(185,135,61,0.20);
+    --line-strong:rgba(185,135,61,0.38);
+    --font-display:'Fraunces', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } *{ transition-duration:.001ms !important; } }
+  body{ margin:0; background:var(--ink); color:var(--text-on-dark); font-family:var(--font-body); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; } img,svg{ display:block; max-width:100%; }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+  h1,h2,h3{ font-family:var(--font-display); font-weight:600; margin:0; letter-spacing:-0.01em; }
+  p{ margin:0; }
+
+  header{ position:sticky; top:0; z-index:50; background:rgba(23,24,27,0.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; gap:20px; }
+  .brand{ display:flex; align-items:baseline; gap:10px; text-decoration:none; color:var(--text-on-dark); }
+  .brand .mark{ font-family:var(--font-display); font-size:22px; font-weight:700; white-space:nowrap; }
+  .brand .sub{ font-family:var(--font-mono); font-size:11px; color:var(--text-on-dark-dim); white-space:nowrap; }
+  @media (max-width:600px){
+    .brand{ flex-direction:column; align-items:flex-start; gap:2px; }
+  }
+  .back-link{ font-size:14.5px; color:var(--text-on-dark-dim); text-decoration:none; border-bottom:1px solid transparent; padding-bottom:2px; transition:all .15s ease; }
+  .back-link:hover{ color:var(--text-on-dark); border-color:var(--line-strong); }
+
+  .hero{ padding:64px 0 40px; border-bottom:1px solid var(--line); }
+  .hero .eyebrow{ font-family:var(--font-mono); font-size:12px; color:var(--gold); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:14px; }
+  .hero h1{ font-size:clamp(32px,4.6vw,48px); line-height:1.08; margin-bottom:18px; }
+  .hero p{ font-size:17px; color:var(--text-on-dark-dim); }
+
+  main.wrap{ padding-top:10px; padding-bottom:80px; }
+
+  .timeline{ border-left:1px solid var(--line-strong); margin:0; padding:0; list-style:none; }
+  .timeline li{ position:relative; padding:0 0 52px 32px; scroll-margin-top:90px; }
+  .timeline li:last-child{ padding-bottom:0; }
+  .timeline li::before{
+    content:"";
+    position:absolute; left:-7px; top:4px;
+    width:12px; height:12px; background:var(--ink);
+    border:2px solid var(--gold); border-radius:50%;
+  }
+  .timeline .year{ font-family:var(--font-mono); font-size:13px; color:var(--gold); display:block; margin-bottom:6px; }
+  .timeline h2{ font-size:20px; margin-bottom:12px; }
+  .timeline p{ font-size:15px; color:var(--text-on-dark-dim); }
+  .timeline p + p{ margin-top:10px; }
+
+  .photo-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:12px; }
+  .photo-row figure{ margin:0; flex:0 1 260px; min-width:220px; max-width:320px; }
+  .photo-row img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    clip-path:polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  }
+  .photo-row figcaption{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--text-on-dark-dim);
+    margin-top:8px;
+  }
+  @media (max-width:640px){
+    .photo-row img{ height:200px; }
+  }
+
+  .photo-trigger{
+    position:relative; display:block; width:100%; box-sizing:border-box;
+    cursor:zoom-in; background:none; border:none; padding:0; margin:0;
+    font:inherit; color:inherit; text-align:inherit; appearance:none;
+  }
+  .photo-trigger .zoom-hint{
+    position:absolute;
+    right:8px;
+    bottom:8px;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#2E0F1C;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 3px 8px rgba(0,0,0,0.35);
+    pointer-events:none;
+  }
+  .photo-trigger .zoom-hint svg{ width:14px; height:14px; }
+
+  .photo-lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(23,15,17,0.86);
+    backdrop-filter:blur(4px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+    padding:40px 20px;
+    cursor:zoom-out;
+  }
+  .photo-lightbox.open{ display:flex; }
+  .photo-lightbox img{
+    max-width:min(900px, 90vw);
+    max-height:85vh;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    clip-path:polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  }
+  .photo-lightbox .lb-close{
+    position:absolute;
+    top:22px;
+    right:26px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    color:var(--text-on-dark);
+    font-size:20px;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .photo-lightbox .lb-close:hover{ border-color:var(--gold); color:var(--gold); }
+
+  .year-nav{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:4px 4px 20px;
+    margin-bottom:36px;
+    border-bottom:1px solid var(--line);
+    scrollbar-width:thin;
+    scrollbar-color:var(--line-strong) transparent;
+  }
+  .year-nav::-webkit-scrollbar{ height:5px; }
+  .year-nav::-webkit-scrollbar-thumb{ background:var(--line-strong); }
+  .year-nav a{
+    flex:0 0 auto;
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--text-on-dark-dim);
+    text-decoration:none;
+    padding:8px 15px;
+    border:1px solid var(--line-strong);
+    white-space:nowrap;
+    transition:all .15s ease;
+  }
+  .year-nav a:hover{ border-color:var(--gold); color:var(--gold); }
+
+  .note-box{
+    background:var(--paper);
+    color:var(--text-on-paper);
+    padding:28px 30px;
+    clip-path:polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  }
+  .note-box .eyebrow{ font-family:var(--font-mono); font-size:11px; color:var(--text-on-paper-dim); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:10px; }
+  .note-box h2{ font-size:20px; margin-bottom:10px; }
+  .note-box p{ font-size:14.5px; color:var(--text-on-paper-dim); }
+
+  .gate{ padding:64px 0; text-align:center; }
+  .gate p{ color:var(--text-on-dark-dim); font-size:15px; margin-bottom:20px; }
+  .gate a{ display:inline-block; padding:12px 26px; background:var(--gold); color:#2E0F1C; text-decoration:none; font-weight:600; font-size:14.5px; }
+  .gate a:hover{ background:#D6AC64; }
+
+  footer{ border-top:1px solid var(--line); padding:34px 0; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+  .foot-row .brand-line{ font-size:14px; color:var(--text-on-dark-dim); }
+  .foot-row .brand-line strong{ color:var(--text-on-dark); }
+  footer .fine{ font-size:12.5px; color:var(--text-on-dark-dim); font-family:var(--font-mono); }
+  footer a{ color:inherit; }
+
+  .back-to-top{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#2E0F1C;
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:19px;
+    line-height:1;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(8px);
+    transition:opacity .2s ease, transform .2s ease, visibility .2s ease, background .15s ease;
+    z-index:80;
+  }
+  .back-to-top.visible{ opacity:1; visibility:visible; transform:translateY(0); }
+  .back-to-top:hover{ background:#D6AC64; }
+  @media (min-width:861px){
+    .back-to-top{
+      width:66px;
+      height:66px;
+      right:28px;
+      bottom:28px;
+      font-size:28px;
+    }
+  }
+
+  .menu-wrap{ position:relative; display:flex; align-items:center; }
+  .menu-toggle{
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:border-color .15s ease;
+    flex-shrink:0;
+  }
+  .menu-toggle:hover{ border-color:var(--gold); }
+  .menu-toggle svg{ width:16px; height:16px; display:block; }
+  .menu-toggle svg line{ stroke:var(--text-on-dark-dim); stroke-width:1.6; transition:stroke .15s ease; }
+  .menu-toggle:hover svg line{ stroke:var(--gold); }
+  .menu-panel{
+    position:absolute;
+    top:calc(100% + 10px);
+    right:0;
+    min-width:230px;
+    background:var(--paper);
+    color:var(--text-on-paper);
+    padding:18px 22px;
+    clip-path:polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+    display:none;
+    flex-direction:column;
+    gap:9px;
+    box-shadow:0 14px 32px rgba(0,0,0,0.4);
+    z-index:90;
+  }
+  .menu-panel.open{ display:flex; }
+  .menu-panel .mlabel{
+    font-family:var(--font-mono); font-size:14px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--text-on-paper-dim); margin-bottom:4px;
+  }
+  .menu-panel a{ color:var(--text-on-paper); text-decoration:none; font-size:14px; border-bottom:1px solid transparent; padding-bottom:1px; }
+  .menu-panel a:hover{ border-color:var(--text-on-paper-dim); }
+  .menu-panel .member-only{ display:none; }
+  body.is-logged-in .menu-panel .member-only{ display:block; }
+
+  .nav-right{ display:flex; align-items:center; gap:28px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <span class="mark">Mineralienfreunde Bernau</span>
+      <span class="sub">Bezirksgruppe der VFMG e.V.</span>
+    </a>
+    <div class="nav-right">
+    <a href="index.html" class="back-link">← Zur Startseite</a>
+    <div class="menu-wrap">
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menuPanel" aria-label="Weitere Seiten öffnen">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <nav class="menu-panel" id="menuPanel" aria-label="Weitere Seiten">
+    <a href="index.html#ueber-uns">Über uns</a>
+    <a href="index.html#aktivitaeten">Aktivitäten</a>
+    <a href="chronik.html">Chronik</a>
+    <a href="galerie.html">Galerie</a>
+    <a href="jahresprogramm.html">Jahresprogramm</a>
+    <a href="index.html#sammlung">Sammlung</a>
+    <a href="literaturempfehlungen.html">Literaturempfehlungen</a>
+    <a href="index.html#kontakt">Kontakt</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="login.html">Login</a>
+    <span class="mlabel member-only">Mitgliederbereich</span>
+    <a href="gruppentreffen.html" class="member-only">Gruppentreffen</a>
+    <a href="steckbriefe.html" class="member-only">Steckbriefe</a>
+    <a href="vortraege.html" class="member-only">Vorträge</a>
+    <a href="#" class="member-only" id="logoutLink">Abmelden</a>
+    </nav>
+  </div>
+  </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Mitgliederbereich</span>
+    <h1>Gruppentreffen</h1>
+    <p>Rückblicke auf unsere monatlichen Gruppentreffen — mit Fotos und Informationen</p>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <div id="gateNotice" class="gate" style="display:none;">
+    <p>Dieser Bereich ist nur für angemeldete Mitglieder sichtbar.</p>
+    <a href="login.html">Zum Login</a>
+  </div>
+
+  <div id="memberContent">
+    <div class="note-box" style="margin-bottom:44px;">
+      <span class="eyebrow">In Vorbereitung</span>
+      <h2>Hier entstehen die Rückblicke</h2>
+      <p>An dieser Stelle sammeln wir künftig Fotos und Notizen zu unseren Gruppentreffen — sobald die ersten Einträge vorliegen, erscheinen sie hier in der Zeitleiste, wie bei der Galerie.</p>
+    </div>
+
+    <nav class="year-nav" aria-label="Zu einem Jahr springen">
+      <a href="#gt2026">2026</a>
+    </nav>
+    <ol class="timeline">
+      <li id="gt2026">
+        <span class="year">2026</span>
+        <h2>Titel folgt</h2>
+        <div class="photo-row">
+          <figure>
+            <button type="button" class="photo-trigger" aria-label="Foto vergrößert anzeigen">
+            <img src="gallery+/2024-gruppentreffen.jpg" alt="Platzhalterbild — wird durch ein Foto vom ersten eingetragenen Gruppentreffen ersetzt">
+            <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="19" y1="19" x2="15.2" y2="15.2"/></svg></span>
+            </button>
+            <figcaption>Platzhalter-Eintrag — wird durch den ersten eingetragenen Rückblick ersetzt.</figcaption>
+          </figure>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+    <div class="brand-line">&copy; <span id="copyYear">2026</span> <strong>Mineralienfreunde Bernau</strong> – Bezirksgruppe Bernau der VFMG e.V.</div>
+    <div class="fine">bg.bernau-b-berlin@vfmg.de · <a href="https://vfmg.de/bezirksgruppen/bezirksgruppen-in-brandenburg">vfmg.de</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div>
+    </div>
+  </div>
+</footer>
+
+
+<div class="photo-lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-label="Foto vergrößert">
+  <button type="button" class="lb-close" id="photoLightboxClose" aria-label="Schließen">&times;</button>
+  <img id="photoLightboxImg" src="" alt="">
+</div>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Nach oben springen">&uarr;</button>
+
+<script>
+  (function(){
+    var btn = document.getElementById('backToTop');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+      btn.classList.toggle('visible', window.scrollY > 400);
+    });
+    btn.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    var el = document.getElementById('copyYear');
+    if(el){ el.textContent = new Date().getFullYear(); }
+  })();
+</script>
+
+<script>
+  (function(){
+    // Platzhalter fuer den spaeteren Mitglieder-Login: sobald ein echtes
+    // Login vorhanden ist, hier den tatsaechlichen Anmeldestatus abfragen
+    // (z.B. Session-Cookie / Server-Check) statt localStorage.
+    var loggedIn = localStorage.getItem('mfbLoggedIn') === 'true';
+    document.body.classList.toggle('is-logged-in', loggedIn);
+
+    // Diese Seite gehoert zum Mitgliederbereich: Inhalt nur zeigen,
+    // wenn (Platzhalter-)Login vorhanden ist.
+    var gate = document.getElementById('gateNotice');
+    var content = document.getElementById('memberContent');
+    if(!loggedIn){
+      if(gate) gate.style.display = 'block';
+      if(content) content.style.display = 'none';
+    }
+
+    var logoutLink = document.getElementById('logoutLink');
+    if(logoutLink){
+      logoutLink.addEventListener('click', function(e){
+        e.preventDefault();
+        localStorage.removeItem('mfbLoggedIn');
+        window.location.href = 'index.html';
+      });
+    }
+  })();
+</script>
+<script>
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var panel = document.getElementById('menuPanel');
+    if(!toggle || !panel) return;
+    toggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = panel.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    document.addEventListener('click', function(e){
+      if(!panel.contains(e.target) && !toggle.contains(e.target)){
+        panel.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){
+        panel.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    var triggers = document.querySelectorAll('.photo-trigger');
+    var lightbox = document.getElementById('photoLightbox');
+    var lightboxImg = document.getElementById('photoLightboxImg');
+    var closeBtn = document.getElementById('photoLightboxClose');
+    if(!lightbox || !lightboxImg || !closeBtn) return;
+    var open = function(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+      lightbox.classList.add('open');
+    };
+    var close = function(){ lightbox.classList.remove('open'); };
+    triggers.forEach(function(trigger){
+      var img = trigger.querySelector('img');
+      if(!img) return;
+      trigger.addEventListener('click', function(){ open(img.src, img.alt); });
+    });
+    closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', function(e){
+      if(e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') close();
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mineralienfreunde Bernau — Bezirksgruppe Bernau der VFMG</title>
+<meta name="description" content="Die Mineralienfreunde Bernau sammeln seit 1983 Mineralien, Gesteine und Fossilien. Bezirksgruppe Bernau der Vereinigung der Freunde der Mineralogie und Geologie e.V. (VFMG).">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2E0F1C;
+    --ink-soft:#3B1626;
+    --paper:#EFDFB8;
+    --paper-dim:#C7A98A;
+    --text-on-dark:#EFDFB8;
+    --text-on-dark-dim:#C7A98A;
+    --text-on-paper:#2E0F1C;
+    --text-on-paper-dim:#3B1626;
+    --gold:#B9873D;
+    --malachite:#7FA07A;
+    --azurite:#7A93B0;
+    --amethyst:#D6AC64;
+    --cinnabar:#B0714A;
+    --line:rgba(185,135,61,0.20);
+    --line-strong:rgba(185,135,61,0.38);
+    --line-paper:rgba(46,15,28,0.16);
+    --font-display:'Fraunces', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+    --facet: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text-on-dark);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+  img,svg{ display:block; max-width:100%; }
+
+  :focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  h1,h2,h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  p{ margin:0; }
+
+  .tag{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(23,24,27,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 0;
+    gap:20px;
+  }
+  .brand{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    text-decoration:none;
+    color:var(--text-on-dark);
+  }
+  .brand .mark{
+    font-family:var(--font-display);
+    font-size:22px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .brand .sub{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--text-on-dark-dim);
+    white-space:nowrap;
+  }
+  @media (max-width:600px){
+    .brand{ flex-direction:column; align-items:flex-start; gap:2px; }
+  }
+  .navlinks{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .navlinks a{
+    text-decoration:none;
+    font-size:14.5px;
+    color:var(--text-on-dark-dim);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .navlinks a:hover{ color:var(--text-on-dark); border-color:var(--line-strong); }
+
+  .navmenu-btn{ display:none; }
+
+  /* ---------- Buchhinweis ---------- */
+  .book-banner{
+    background:var(--paper);
+    color:var(--text-on-paper);
+    padding:26px 28px;
+    margin:0 0 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+    clip-path:polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  }
+  .book-banner .tag-label{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--text-on-paper-dim);
+    margin-bottom:6px;
+    display:block;
+  }
+  .book-banner h3{ font-size:19px; margin-bottom:4px; }
+  .book-banner h3 .subtitle{ display:block; font-family:var(--font-body); font-weight:700; font-size:14px; color:var(--text-on-paper-dim); margin-top:2px; }
+  .book-banner p{ font-size:14.5px; color:var(--text-on-paper-dim); }
+  .book-banner .cover{
+    flex-shrink:0;
+    width:130px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.28);
+    clip-path:polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+    cursor:zoom-in;
+    transition:transform .15s ease;
+  }
+  .book-banner .cover:hover{ transform:translateY(-2px); }
+  .book-banner .book-text{ flex:1; min-width:220px; }
+
+  .cover-lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(23,15,17,0.86);
+    backdrop-filter:blur(4px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+    padding:40px 20px;
+    cursor:zoom-out;
+  }
+  .cover-lightbox.open{ display:flex; }
+  .cover-lightbox img{
+    max-width:min(420px, 90vw);
+    max-height:85vh;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    clip-path:polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  }
+  .cover-lightbox .lb-close{
+    position:absolute;
+    top:22px;
+    right:26px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    color:var(--text-on-dark);
+    font-size:20px;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .cover-lightbox .lb-close:hover{ border-color:var(--gold); color:var(--gold); }
+
+  .cover-trigger{ position:relative; display:inline-block; }
+  .cover-trigger .zoom-hint{
+    position:absolute;
+    right:-6px;
+    bottom:-6px;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#2E0F1C;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 3px 8px rgba(0,0,0,0.35);
+    pointer-events:none;
+  }
+  .cover-trigger .zoom-hint svg{ width:14px; height:14px; }
+
+  .kontakt-card{
+    background:var(--paper);
+    color:var(--text-on-paper);
+    padding:32px 34px;
+    display:flex;
+    align-items:center;
+    gap:26px;
+    flex-wrap:wrap;
+    clip-path:polygon(0 16px, 16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+  }
+  .kontakt-avatar{
+    width:64px; height:64px; flex-shrink:0;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-size:22px; font-weight:700;
+  }
+  .kontakt-info{ flex:1; min-width:220px; }
+  .kontakt-info .role{ font-family:var(--font-mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-on-paper-dim); display:block; margin-bottom:4px; }
+  .kontakt-info h3{ font-size:20px; margin-bottom:10px; }
+  .kontakt-row{ display:flex; gap:10px; font-size:14.5px; margin-bottom:5px; }
+  .kontakt-row .k{ color:var(--text-on-paper-dim); min-width:90px; font-family:var(--font-mono); font-size:12.5px; padding-top:2px; }
+  .kontakt-row a{ color:var(--text-on-paper); text-decoration:none; border-bottom:1px solid var(--text-on-paper-dim); }
+  .kontakt-row .placeholder{ background:rgba(185,135,61,0.32); padding:1px 6px; border-radius:2px; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 28px 96px;
+    display:grid;
+    grid-template-columns:1.05fr 1fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero-copy .eyebrow-free{ /* intentionally no eyebrow label, per design guidance */ }
+  .hero h1{
+    font-size:clamp(38px, 5vw, 58px);
+    line-height:1.05;
+    margin-bottom:22px;
+  }
+  .hero p.lede{
+    font-size:18px;
+    color:var(--text-on-dark-dim);
+    max-width:46ch;
+    margin-bottom:34px;
+  }
+  .cta-row{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:15px;
+    padding:14px 24px;
+    text-decoration:none;
+    display:inline-block;
+    clip-path:var(--facet);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:#2E0F1C;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); }
+  .btn-ghost{
+    background:transparent;
+    color:var(--text-on-dark);
+    border:1px solid var(--line-strong);
+  }
+  .btn-ghost:hover{ border-color:var(--gold); transform:translateY(-2px); }
+
+  .hero-art{
+    aspect-ratio:1/1;
+    animation:rise .9s ease both;
+  }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  /* ---------- Sections generic ---------- */
+  section{ padding:80px 0; border-top:1px solid var(--line); }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:44px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{ font-size:clamp(28px,3.4vw,36px); }
+  .section-head .note{
+    color:var(--text-on-dark-dim);
+    max-width:57ch;
+    font-size:15px;
+  }
+
+  /* ---------- Über uns ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .about-grid p{
+    color:var(--text-on-dark-dim);
+    font-size:16.5px;
+    margin-bottom:16px;
+    max-width:58ch;
+  }
+  .facts{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    border-top:1px solid var(--line);
+  }
+  .fact{
+    display:flex;
+    justify-content:space-between;
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .fact .k{ color:var(--text-on-dark-dim); font-size:14px; }
+  .fact .v{ font-family:var(--font-mono); font-size:14px; color:var(--gold); text-align:right; }
+
+  /* ---------- Sammlung ---------- */
+  .filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:36px;
+  }
+  .filter-btn{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    background:transparent;
+    color:var(--text-on-dark-dim);
+    border:1px solid var(--line);
+    padding:8px 14px;
+    cursor:pointer;
+    clip-path:var(--facet);
+    transition:all .15s ease;
+  }
+  .filter-btn:hover{ border-color:var(--line-strong); color:var(--text-on-dark); }
+  .filter-btn.active{
+    background:var(--paper);
+    color:var(--text-on-paper);
+    border-color:var(--paper);
+  }
+
+  .carousel-wrap{
+    position:relative;
+  }
+  .carousel-wrap::before,
+  .carousel-wrap::after{
+    content:"";
+    position:absolute;
+    top:0; bottom:8px;
+    width:48px;
+    z-index:2;
+    pointer-events:none;
+  }
+  .carousel-wrap::before{
+    left:0;
+    background:linear-gradient(to right, var(--ink), rgba(23,24,27,0));
+    opacity:1;
+    transition:opacity .2s ease;
+  }
+  .carousel-wrap::after{
+    right:0;
+    background:linear-gradient(to left, var(--ink), rgba(23,24,27,0));
+    opacity:1;
+    transition:opacity .2s ease;
+  }
+  .carousel-wrap.at-start::before{ opacity:0; }
+  .carousel-wrap.at-end::after{ opacity:0; }
+  .carousel-wrap.at-start .carousel-nav.prev{ opacity:0; visibility:hidden; }
+  .carousel-wrap.at-end .carousel-nav.next{ opacity:0; visibility:hidden; }
+  .carousel-nav{ transition:opacity .2s ease, visibility .2s ease, background .15s ease, transform .15s ease; }
+  .carousel-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:3;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:var(--paper);
+    color:var(--text-on-paper);
+    border:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.35);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .carousel-nav:hover{ background:var(--gold); transform:translateY(-50%) scale(1.06); }
+  .carousel-nav.prev{ left:-4px; }
+  .carousel-nav.next{ right:-4px; }
+
+  .specimen-grid{
+    display:flex;
+    gap:22px;
+    overflow-x:auto;
+    scroll-snap-type:x proximity;
+    padding:2px 4px 12px;
+    scrollbar-width:thin;
+    scrollbar-color:var(--line-strong) transparent;
+    overflow-anchor:none;
+  }
+  .specimen-grid::-webkit-scrollbar{ height:6px; }
+  .specimen-grid::-webkit-scrollbar-thumb{ background:var(--line-strong); }
+  .specimen{
+    background:var(--paper);
+    color:var(--text-on-paper);
+    padding:0 0 20px;
+    clip-path:polygon(0 16px, 16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+    transition:transform .35s ease, box-shadow .35s ease, filter .35s ease, opacity .35s ease;
+    position:relative;
+    overflow:hidden;
+    flex:0 0 250px;
+    scroll-snap-align:start;
+  }
+  .specimen-img{
+    width:100%;
+    height:150px;
+    background:var(--paper-dim);
+    overflow:hidden;
+    margin-bottom:16px;
+  }
+  .specimen-img img{ width:100%; height:100%; object-fit:cover; }
+  .specimen .cardbody{ padding:2px 20px 0; }
+  .specimen .cat{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:11px;
+    padding:3px 9px;
+    color:#fff;
+    margin-bottom:14px;
+  }
+  .cat-mineralien{ background:var(--azurite); }
+  .cat-gesteine{ background:var(--malachite); }
+  .cat-fossilien{ background:var(--cinnabar); }
+
+  .specimen h3{ font-size:20px; margin-bottom:6px; }
+  .specimen .locality{ font-size:14px; color:var(--text-on-paper-dim); margin-bottom:14px; }
+  .specimen .meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:14px;
+    border-top:1px solid var(--line-paper);
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--text-on-paper-dim);
+  }
+  .specimen.hidden{ display:none; }
+
+  /* ---------- Aktivitäten ---------- */
+  .termine-list{
+    border-top:1px solid var(--line);
+  }
+  .termin{
+    display:grid;
+    grid-template-columns:150px 130px 1fr;
+    gap:20px;
+    align-items:baseline;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .termin .date{ font-family:var(--font-mono); font-size:13.5px; color:var(--gold); }
+  .termin .type{ font-size:13.5px; color:var(--text-on-dark-dim); }
+  .termin .desc h4{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:16px;
+    margin:0 0 4px;
+    color:var(--text-on-dark);
+  }
+  .termin .desc p{ font-size:14.5px; color:var(--text-on-dark-dim); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:40px 0;
+  }
+  .foot-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .foot-row .brand-line{ font-size:14px; color:var(--text-on-dark-dim); }
+  .foot-row .brand-line strong{ color:var(--text-on-dark); }
+  footer .fine{ font-size:12.5px; color:var(--text-on-dark-dim); font-family:var(--font-mono); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    .navlinks{ display:none; }
+    .hero{ grid-template-columns:1fr; padding:56px 28px 64px; }
+    .hero-art{ order:-1; max-width:320px; margin:0 auto; }
+    .about-grid{ grid-template-columns:1fr; }
+    .termin{ grid-template-columns:1fr; gap:4px; }
+  }
+  @media (max-width:520px){
+    .specimen{ flex-basis:210px; }
+    .carousel-nav{ display:none; }
+    .wrap{ padding:0 20px; }
+  }
+
+  .back-to-top{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#2E0F1C;
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:19px;
+    line-height:1;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(8px);
+    transition:opacity .2s ease, transform .2s ease, visibility .2s ease, background .15s ease;
+    z-index:80;
+  }
+  .back-to-top.visible{ opacity:1; visibility:visible; transform:translateY(0); }
+  .back-to-top:hover{ background:#D6AC64; }
+  @media (min-width:861px){
+    .back-to-top{
+      width:66px;
+      height:66px;
+      right:28px;
+      bottom:28px;
+      font-size:28px;
+    }
+  }
+
+  .menu-wrap{ position:relative; display:flex; align-items:center; }
+  .menu-toggle{
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:border-color .15s ease;
+    flex-shrink:0;
+  }
+  .menu-toggle:hover{ border-color:var(--gold); }
+  .menu-toggle svg{ width:16px; height:16px; display:block; }
+  .menu-toggle svg line{ stroke:var(--text-on-dark-dim); stroke-width:1.6; transition:stroke .15s ease; }
+  .menu-toggle:hover svg line{ stroke:var(--gold); }
+  .menu-panel{
+    position:absolute;
+    top:calc(100% + 10px);
+    right:0;
+    min-width:230px;
+    background:var(--paper);
+    color:var(--text-on-paper);
+    padding:18px 22px;
+    clip-path:polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+    display:none;
+    flex-direction:column;
+    gap:9px;
+    box-shadow:0 14px 32px rgba(0,0,0,0.4);
+    z-index:90;
+  }
+  .menu-panel.open{ display:flex; }
+  .menu-panel .mlabel{
+    font-family:var(--font-mono); font-size:14px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--text-on-paper-dim); margin-bottom:4px;
+  }
+  .menu-panel a{ color:var(--text-on-paper); text-decoration:none; font-size:14px; border-bottom:1px solid transparent; padding-bottom:1px; }
+  .menu-panel a:hover{ border-color:var(--text-on-paper-dim); }
+  .menu-panel .member-only{ display:none; }
+  body.is-logged-in .menu-panel .member-only{ display:block; }
+  body.is-logged-in .menu-panel a[href="login.html"]{ display:none; }
+  body.is-logged-in .navlinks li:has(a[href="login.html"]){ display:none; }
+
+  .nav-right{ display:flex; align-items:center; gap:28px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark">Mineralienfreunde Bernau</span>
+      <span class="sub">Bezirksgruppe der VFMG e.V.</span>
+    </a>
+    <div class="nav-right">
+    <ul class="navlinks">
+      <li><a href="#ueber-uns">Über uns</a></li>
+      <li><a href="#sammlung">Sammlung</a></li>
+      <li><a href="#aktivitaeten">Aktivitäten</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+    <div class="menu-wrap">
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menuPanel" aria-label="Weitere Seiten öffnen">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg>
+    </button>
+    <nav class="menu-panel" id="menuPanel" aria-label="Weitere Seiten">
+    <a href="#ueber-uns">Über uns</a>
+    <a href="#aktivitaeten">Aktivitäten</a>
+    <a href="chronik.html">Chronik</a>
+    <a href="galerie.html">Galerie</a>
+    <a href="jahresprogramm.html">Jahresprogramm</a>
+    <a href="#sammlung">Sammlung</a>
+    <a href="literaturempfehlungen.html">Literaturempfehlungen</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="login.html">Login</a>
+    <span class="mlabel member-only">Mitgliederbereich</span>
+    <a href="gruppentreffen.html" class="member-only">Gruppentreffen</a>
+    <a href="steckbriefe.html" class="member-only">Steckbriefe</a>
+    <a href="vortraege.html" class="member-only">Vorträge</a>
+    <a href="#" class="member-only" id="logoutLink">Abmelden</a>
+    </nav>
+  </div>
+  </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero wrap" style="border-top:none;">
+    <div class="hero-copy">
+      <h1>Steine lesen lernen.</h1>
+      <p class="lede">Seit 1983 treffen sich in Bernau Menschen, die Mineralien, Gesteine und Fossilien sammeln, bestimmen und bearbeiten. Manche halten ihre Funde in der Makrofotografie fest, andere schauen mit der UV-Lampe nach, wie ein Stein reagiert. Als Bezirksgruppe Bernau der VFMG sind wir die einzige Gruppe der Vereinigung in Brandenburg.</p>
+      <div class="cta-row">
+        <a href="#aktivitaeten" class="btn btn-primary">Wie wir uns treffen</a>
+        <a href="#sammlung" class="btn btn-ghost">Sammlung durchstöbern</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <!-- outer rock shell -->
+        <path d="M300 20 L420 55 L510 140 L560 260 L540 390 L460 490 L340 560 L210 550 L100 470 L45 350 L55 210 L140 90 L220 40 Z"
+              fill="#3A3A40" stroke="#4A4A52" stroke-width="2"/>
+        <!-- inner cavity -->
+        <path d="M300 70 L400 100 L470 175 L505 275 L488 375 L420 450 L320 495 L220 485 L140 425 L100 330 L110 225 L175 130 L235 85 Z"
+              fill="#2E0F1C"/>
+        <!-- crystal facets radiating inward -->
+        <g stroke="#2E0F1C" stroke-width="1.5">
+          <polygon points="300,300 300,90 380,120" fill="#D6AC64"/>
+          <polygon points="300,300 380,120 460,190" fill="#B9873D"/>
+          <polygon points="300,300 460,190 495,290" fill="#C7A98A"/>
+          <polygon points="300,300 495,290 470,400" fill="#3B1626"/>
+          <polygon points="300,300 470,400 400,470" fill="#D6AC64"/>
+          <polygon points="300,300 400,470 300,500" fill="#D6AC64"/>
+          <polygon points="300,300 300,500 200,480" fill="#3B1626"/>
+          <polygon points="300,300 200,480 130,415" fill="#B9873D"/>
+          <polygon points="300,300 130,415 110,320" fill="#C7A98A"/>
+          <polygon points="300,300 110,320 130,220" fill="#3B1626"/>
+          <polygon points="300,300 130,220 200,140" fill="#D6AC64"/>
+          <polygon points="300,300 200,140 300,90" fill="#D6AC64"/>
+        </g>
+        <circle cx="300" cy="300" r="14" fill="#EFDFB8" opacity="0.85"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Buchhinweis -->
+  <div class="wrap" style="padding:0 28px 0;">
+    <div class="book-banner">
+      <button type="button" class="cover-trigger" id="coverTrigger" style="all:unset; cursor:zoom-in; flex-shrink:0; position:relative; display:inline-block;" aria-label="Buchcover vergrößert anzeigen">
+      <img class="cover" src="buchcover.jpg" alt="Buchcover „Unser Hobby: Mineralien, Gesteine und Fossilien“, herausgegeben von den Mineralienfreunden Bernau">
+      <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="19" y1="19" x2="15.2" y2="15.2"/></svg></span>
+      </button>
+      <div class="book-text">
+        <span class="tag-label">Unser eigenes Buch</span>
+        <h3>„Unser Hobby: Mineralien, Gesteine und Fossilien“<span class="subtitle">Erfahrungen der Mineralienfreunde Bernau</span></h3>
+        <p>Das Buch gibt eine einfache Anleitung, wie man sich unserem Hobby widmen und es mit viel Freude ausüben kann. Es ist Werbung für unsere Passion, von dem Wunsch getragen, es anderen näherzubringen. Ein Buch für alle, die sich bereits für Steine und Fossilien interessieren oder es bald mit Begeisterung tun werden.</p>
+      </div>
+      <a href="https://www.respublica-verlag.de/werke-sachliteratur/978-3-95968-143-8" target="_blank" rel="noopener" class="btn btn-ghost" style="border-color:var(--text-on-paper-dim); color:var(--text-on-paper);">Mehr erfahren</a>
+    </div>
+  </div>
+
+  <!-- Über uns -->
+  <section id="ueber-uns">
+    <div class="wrap about-grid">
+      <div>
+        <h2 style="margin-bottom:24px;">Über uns</h2>
+        <p>Am 7. Juni 1983 trafen sich neun Steinbegeisterte im Volkskunstkabinett Am Steintor in Bernau und gründeten die Fachgruppe Mineralogie-Geologie beim Kulturbund. Zu den Gründungsmitgliedern zählten Christa und Werner Beck, Jürgen Heinrich, Gerhard Jahnke, Inge und Helmut Mieles, Erwin Pohl, Gondula Schröder und Dieter Schwarze.</p>
+        <p>Nach der Wende konstituierte sich die Gruppe am 3. April 1991 als Bezirksgruppe Bernau in der Vereinigung der Freunde der Mineralogie und Geologie e.V. (VFMG) neu — Deutschlands größter und ältester Sammlervereinigung. Wir sind aktuell die einzige VFMG-Gruppe in Brandenburg, mit Mitgliedern vor allem aus der Region Barnim und dem nordöstlichen Berliner Umland.</p>
+        <p>Mehr über uns gibt es in unserer Chronik und Galerie zu lesen und zu sehen.</p>
+        <a class="link-line" href="chronik.html" style="display:inline-block; margin-top:8px; font-family:var(--font-mono); font-size:13px; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);">Zur Chronik →</a>
+        <a class="link-line" href="galerie.html" style="display:inline-block; margin-top:8px; margin-left:20px; font-family:var(--font-mono); font-size:13px; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);">Zur Galerie →</a>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="k">Gegründet</span><span class="v">1983</span></div>
+        <div class="fact"><span class="k">Seit 1991</span><span class="v">Bezirksgruppe der VFMG</span></div>
+        <div class="fact"><span class="k">Gruppentreffen</span><span class="v">jeden 3. Sonntag im Monat</span></div>
+        <div class="fact"><span class="k">Exkursionen</span><span class="v">2–3 mal mehrtägig im Jahr<br>mehrfach eintägig im Jahr</span></div>
+        <div class="fact"><span class="k">Mitgliedsbeitrag (Gruppe)</span><span class="v">12 € / Jahr</span></div>
+        <div class="fact"><span class="k">Gruppenleitung</span><span class="v">Jörg Sandig (Leiter)<br>Birger Derksen (Stellvertreter)<br>Marion Blischke (Finanzen)<br>Stefan Erbs (digitales Archiv)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sammlung -->
+  <section id="sammlung">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Aus unseren Sammlungen</h2>
+        <p class="note">Eine Auswahl an Fundstücken aus unseren Mitgliedssammlungen — mit Fundort und Funddatum.</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Nach Sammelgebiet filtern">
+        <button class="filter-btn active" data-filter="alle">Alle</button>
+        <button class="filter-btn" data-filter="mineralien">Mineralien</button>
+        <button class="filter-btn" data-filter="gesteine">Gesteine</button>
+        <button class="filter-btn" data-filter="fossilien">Fossilien</button>
+        <button class="filter-btn" data-filter="makrofotografie">Makrofotografie</button>
+      </div>
+
+      <div class="carousel-wrap">
+        <button class="carousel-nav prev" id="carouselPrev" type="button" aria-label="Vorherige Fundstücke">‹</button>
+        <div class="specimen-grid" id="specimenGrid">
+        <article class="specimen" data-cat="mineralien">
+          <div class="specimen-img"><img src="images/halit.jpg" alt="Halit-Kristallstufe" loading="lazy"></div>
+          <div class="cardbody">
+            <span class="cat cat-mineralien">Mineralien</span>
+            <h3>Halit</h3>
+            <p class="locality">Steinsalz-Kristallstufe</p>
+            <div class="meta"><span>Abb. 20</span><span>Buchseite 39</span></div>
+          </div>
+        </article>
+
+        <article class="specimen" data-cat="mineralien makrofotografie">
+          <div class="specimen-img"><img src="images/schlottwitzer-achat.jpg" alt="Polierter Schlottwitzer Achat" loading="lazy"></div>
+          <div class="cardbody">
+            <span class="cat cat-mineralien">Mineralien</span>
+            <h3>Schlottwitzer Achat, poliert</h3>
+            <p class="locality">Müglitztal, Sachsen</p>
+            <div class="meta"><span>Abb. 89</span><span>Buchseite 121</span></div>
+          </div>
+        </article>
+
+        <article class="specimen" data-cat="gesteine">
+          <div class="specimen-img"><img src="images/rhombenporphyr.jpg" alt="Rhombenporphyr-Gesteinsprobe" loading="lazy"></div>
+          <div class="cardbody">
+            <span class="cat cat-gesteine">Gesteine</span>
+            <h3>Rhombenporphyr</h3>
+            <p class="locality">Vulkanisches Gestein</p>
+            <div class="meta"><span>Abb. 38</span><span>Buchseite 55</span></div>
+          </div>
+        </article>
+
+        <article class="specimen" data-cat="gesteine makrofotografie">
+          <div class="specimen-img"><img src="images/verkieseltes-holz.jpg" alt="Verkieseltes Holz, geschliffen und poliert" loading="lazy"></div>
+          <div class="cardbody">
+            <span class="cat cat-gesteine">Gesteine</span>
+            <h3>Verkieseltes Holz</h3>
+            <p class="locality">Geschliffen und poliert</p>
+            <div class="meta"><span>Abb. 62</span><span>Buchseite 89</span></div>
+          </div>
+        </article>
+
+        <article class="specimen" data-cat="fossilien makrofotografie">
+          <div class="specimen-img"><img src="images/ammonit.jpg" alt="Ammonit der Gattung Aegocrioceras" loading="lazy"></div>
+          <div class="cardbody">
+            <span class="cat cat-fossilien">Fossilien</span>
+            <h3>Ammonit Aegocrioceras</h3>
+            <p class="locality">Kreide, Niedersachsen</p>
+            <div class="meta"><span>Abb. 46</span><span>Buchseite 63</span></div>
+          </div>
+        </article>
+
+        <article class="specimen" data-cat="fossilien">
+          <div class="specimen-img"><img src="images/seeigel.jpg" alt="Fossiler Seeigel Echinocorys sulcata" loading="lazy"></div>
+          <div class="cardbody">
+            <span class="cat cat-fossilien">Fossilien</span>
+            <h3>Seeigel Echinocorys sulcata</h3>
+            <p class="locality">Danium, Dänemark</p>
+            <div class="meta"><span>Abb. 42/43</span><span>Buchseite 59</span></div>
+          </div>
+        </article>
+      </div>
+        <button class="carousel-nav next" id="carouselNext" type="button" aria-label="Weitere Fundstücke">›</button>
+      </div>
+      <p class="note" style="margin-top:24px; font-size:14px;">Wer in unser Hobby einsteigen möchte, findet in unseren Literaturempfehlungen Bestimmungsbücher und Fachzeitschriften zum Weiterlesen.</p>
+      <a class="link-line" href="literaturempfehlungen.html" style="display:inline-block; margin-top:8px; font-family:var(--font-mono); font-size:13px; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);">Literaturempfehlungen →</a>
+    </div>
+  </section>
+
+  <!-- Aktivitäten -->
+  <section id="aktivitaeten">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Wie wir uns treffen</h2>
+        <p class="note">Gäste sind bei unseren Monatstreffen jederzeit willkommen.</p>
+      </div>
+      <div class="termine-list">
+        <div class="termin">
+          <div class="date">Jeden 3. Sonntag</div>
+          <div class="type">Gruppentreffen</div>
+          <div class="desc">
+            <h4>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h4>
+            <p>Regelmäßige Treffen in Bernau mit kurzen Vorträgen der Mitglieder und Gesprächen über Bearbeitung und Präparation von Funden. Wie viele Sammler nutzen wir gelegentlich UV-Lampen, um zu sehen, wie unsere Funde reagieren, und tauschen uns über die Makrofotografie unserer Stücke aus.</p>
+          </div>
+        </div>
+        <div class="termin">
+          <div class="date">2–3 × jährlich</div>
+          <div class="type">Mehrtägige Exkursion</div>
+          <div class="desc">
+            <h4>Erzgebirge, Thüringer Wald, Ostseeküste und mehr</h4>
+            <p>Gemeinsame Fahrten zu Steinbrüchen, Kiesgruben und geologisch interessanten Regionen in Deutschland.</p>
+          </div>
+        </div>
+        <div class="termin">
+          <div class="date">Seit über 30 Jahren</div>
+          <div class="type">Tauschtag der sächsischen Achatsammler</div>
+          <div class="desc">
+            <h4>Jugendherberge Hormersdorf (Geyer), Erzgebirge</h4>
+            <p>Von der Familie Beck mitbegründet, zieht der Tauschtag Sammlerinnen und Sammler aus vielen Ländern an.</p>
+          </div>
+        </div>
+        <div class="termin">
+          <div class="date">Über das Jahr</div>
+          <div class="type">Märkte und Vereinsleben</div>
+          <div class="desc">
+            <h4>Tag der Vereine Bernau bei Berlin, Tag der Vereine Eberswalde, Kunst- und Handwerkermarkt Bernau bei Berlin, Vogelscheuchenmarkt Altlandsberg</h4>
+            <p>Wir zeigen unsere Sammlungen der Öffentlichkeit und gewinnen so neue Interessierte für das Hobby.</p>
+          </div>
+        </div>
+      </div>
+      <a class="link-line" href="jahresprogramm.html" style="display:inline-block; margin-top:24px; font-family:var(--font-mono); font-size:13px; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold);">Zum Jahresprogramm →</a>
+    </div>
+  </section>
+
+  <!-- Kontakt -->
+  <section id="kontakt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Kontakt</h2>
+        <p class="note">Fragen zur Gruppe oder Interesse an einem Besuch? Meldet euch gerne direkt bei unserem Gruppenleiter.</p>
+      </div>
+      <div class="kontakt-card">
+        <div class="kontakt-avatar">JS</div>
+        <div class="kontakt-info">
+          <span class="role">Gruppenleiter</span>
+          <h3>Jörg Sandig</h3>
+          <div class="kontakt-row"><span class="k">E-Mail</span><a href="mailto:bg.bernau-b-berlin@vfmg.de">bg.bernau-b-berlin@vfmg.de</a></div>
+          <div class="kontakt-row"><span class="k">Handy</span><a href="tel:+491606001250">0160 / 600 12 50</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="brand-line">&copy; <span id="copyYear">2026</span> <strong>Mineralienfreunde Bernau</strong> – Bezirksgruppe Bernau der VFMG e.V.</div>
+      <div class="fine">bg.bernau-b-berlin@vfmg.de · <a href="https://vfmg.de/bezirksgruppen/bezirksgruppen-in-brandenburg">vfmg.de</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sammlung nach Sammelgebiet filtern
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const specimens = document.querySelectorAll('.specimen');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      specimens.forEach(card => {
+        const cats = card.dataset.cat.split(' ');
+        const match = filter === 'alle' || cats.includes(filter);
+        card.classList.toggle('hidden', !match);
+      });
+      if (typeof refreshEdgeObservers === 'function') refreshEdgeObservers();
+    });
+  });
+
+  // Karussell-Pfeile für die Sammlung
+  const grid = document.getElementById('specimenGrid');
+  const scrollByCard = () => {
+    const card = grid.querySelector('.specimen:not(.hidden)');
+    return card ? card.getBoundingClientRect().width + 22 : 260;
+  };
+  document.getElementById('carouselPrev').addEventListener('click', () => {
+    grid.scrollBy({ left: -scrollByCard() * 2, behavior: 'smooth' });
+  });
+  document.getElementById('carouselNext').addEventListener('click', () => {
+    grid.scrollBy({ left: scrollByCard() * 2, behavior: 'smooth' });
+  });
+
+  // Verlaufseffekte und Pfeile nur zeigen, wenn in diese Richtung noch etwas zu sehen ist
+  const carouselWrap = grid.closest('.carousel-wrap');
+  const visibleSpecimens = () => Array.from(grid.querySelectorAll('.specimen:not(.hidden)'));
+
+  const firstObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      carouselWrap.classList.toggle('at-start', entry.isIntersecting);
+    });
+  }, { root: grid, threshold: 0.95 });
+
+  const lastObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      carouselWrap.classList.toggle('at-end', entry.isIntersecting);
+    });
+  }, { root: grid, threshold: 0.95 });
+
+  let observedFirst = null;
+  let observedLast = null;
+  const refreshEdgeObservers = () => {
+    const items = visibleSpecimens();
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (first !== observedFirst) {
+      if (observedFirst) firstObserver.unobserve(observedFirst);
+      firstObserver.observe(first);
+      observedFirst = first;
+    }
+    if (last !== observedLast) {
+      if (observedLast) lastObserver.unobserve(observedLast);
+      lastObserver.observe(last);
+      observedLast = last;
+    }
+  };
+  refreshEdgeObservers();
+  window.addEventListener('resize', refreshEdgeObservers);
+</script>
+
+
+<div class="cover-lightbox" id="coverLightbox" role="dialog" aria-modal="true" aria-label="Buchcover vergrößert">
+  <button type="button" class="lb-close" id="coverLightboxClose" aria-label="Schließen">&times;</button>
+  <img src="buchcover-gross.jpg" alt="Buchcover „Unser Hobby: Mineralien, Gesteine und Fossilien“ in vergrößerter Ansicht">
+</div>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Nach oben springen">&uarr;</button>
+
+<script>
+  (function(){
+    var btn = document.getElementById('backToTop');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+      btn.classList.toggle('visible', window.scrollY > 400);
+    });
+    btn.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    var el = document.getElementById('copyYear');
+    if(el){ el.textContent = new Date().getFullYear(); }
+  })();
+</script>
+
+<script>
+  (function(){
+    // Platzhalter fuer den spaeteren Mitglieder-Login: sobald ein echtes
+    // Login vorhanden ist, hier den tatsaechlichen Anmeldestatus abfragen
+    // (z.B. Session-Cookie / Server-Check) statt localStorage.
+    var loggedIn = localStorage.getItem('mfbLoggedIn') === 'true';
+    document.body.classList.toggle('is-logged-in', loggedIn);
+
+    var logoutLink = document.getElementById('logoutLink');
+    if(logoutLink){
+      logoutLink.addEventListener('click', function(e){
+        e.preventDefault();
+        localStorage.removeItem('mfbLoggedIn');
+        window.location.href = 'index.html';
+      });
+    }
+  })();
+</script>
+<script>
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var panel = document.getElementById('menuPanel');
+    if(!toggle || !panel) return;
+    toggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = panel.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    document.addEventListener('click', function(e){
+      if(!panel.contains(e.target) && !toggle.contains(e.target)){
+        panel.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){
+        panel.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    var trigger = document.getElementById('coverTrigger');
+    var lightbox = document.getElementById('coverLightbox');
+    var closeBtn = document.getElementById('coverLightboxClose');
+    if(!trigger || !lightbox || !closeBtn) return;
+    var open = function(){ lightbox.classList.add('open'); };
+    var close = function(){ lightbox.classList.remove('open'); };
+    trigger.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', function(e){
+      if(e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') close();
+    });
+  })();
+</script>
+</body>
+</html>
