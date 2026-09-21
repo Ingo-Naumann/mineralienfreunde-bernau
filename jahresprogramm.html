@@ -21,11 +21,15 @@
     --text-on-paper:#2E0F1C;
     --text-on-paper-dim:#3B1626;
     --gold:#B9873D;
+    --azurite:#7A93B0;
+    --malachite:#7FA07A;
+    --cinnabar:#B0714A;
     --line:rgba(185,135,61,0.20);
     --line-strong:rgba(185,135,61,0.38);
     --font-display:'Fraunces', serif;
     --font-body:'Inter', sans-serif;
     --font-mono:'IBM Plex Mono', monospace;
+    --facet: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
   }
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
@@ -65,11 +69,95 @@
     border-bottom:2px solid var(--gold);
   }
   .year-head:first-child{ margin-top:0; }
+  .year-head.hidden{ display:none; }
+  .year-head.first-visible{ margin-top:0; }
 
   .termine-list{ border-top:1px solid var(--line); }
+  .termine-list.hidden{ display:none; }
   .termin{ display:grid; grid-template-columns:150px 1fr; gap:22px; padding:20px 0; border-bottom:1px solid var(--line); }
+  .termin.hidden{ display:none; }
   .termin .date{ font-family:var(--font-mono); font-size:13.5px; color:var(--gold); padding-top:2px; }
   .termin .date.tbd{ color:var(--text-on-dark-dim); font-style:italic; }
+
+  .filters{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:24px 0 8px; scroll-margin-top:90px; }
+  .filters .filter-label,.filters-fixed .filter-label{ font-family:var(--font-mono); font-size:12px; color:var(--text-on-dark-dim); text-transform:uppercase; letter-spacing:.05em; margin-right:2px; }
+
+  .filters-fixed{ display:none; }
+  @media (min-width:861px){
+    .filters-fixed{
+      display:flex;
+      position:fixed;
+      top:50%;
+      right:24px;
+      transform:translateY(-50%);
+      flex-direction:row;
+      align-items:stretch;
+      gap:0;
+      z-index:70;
+    }
+    .filters-fixed .filter-label{
+      margin:0;
+      writing-mode:vertical-rl;
+      text-orientation:mixed;
+      padding:14px 8px;
+      cursor:default;
+      background:var(--gold);
+      color:#2E0F1C;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      clip-path:polygon(0 10px, 10px 0, 100% 0, 100% 100%, 0 100%);
+      transition:background .15s ease;
+    }
+    .filters-fixed:hover .filter-label,
+    .filters-fixed:focus-within .filter-label{
+      background:#D6AC64;
+    }
+    .filters-fixed .filter-buttons{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:8px;
+      max-width:0;
+      opacity:0;
+      overflow:hidden;
+      pointer-events:none;
+      transition:max-width .3s ease, opacity .2s ease .05s, margin-right .3s ease;
+      margin-right:0;
+    }
+    .filters-fixed:hover .filter-buttons,
+    .filters-fixed:focus-within .filter-buttons{
+      max-width:220px;
+      opacity:1;
+      pointer-events:auto;
+      margin-right:12px;
+    }
+    .filters-fixed .filter-btn{
+      align-self:stretch;
+      text-align:center;
+      white-space:nowrap;
+    }
+  }
+  .filter-btn{
+    font-family:var(--font-mono);
+    font-size:12px;
+    background:transparent;
+    color:var(--text-on-dark-dim);
+    border:1px solid var(--line);
+    padding:7px 14px;
+    cursor:pointer;
+    clip-path:var(--facet);
+    transition:all .15s ease;
+  }
+  .filter-btn:hover{ border-color:var(--line-strong); color:var(--text-on-dark); }
+  .filter-btn.active{ background:var(--paper); color:var(--text-on-paper); border-color:var(--paper); }
+  .filter-btn[data-filter="gruppentreffen"]{ border-color:var(--azurite); }
+  .filter-btn[data-filter="gruppentreffen"].active{ background:var(--azurite); color:#fff; border-color:var(--azurite); }
+  .filter-btn[data-filter="exkursion"]{ border-color:var(--malachite); }
+  .filter-btn[data-filter="exkursion"].active{ background:var(--malachite); color:#fff; border-color:var(--malachite); }
+  .filter-btn[data-filter="maerkte"]{ border-color:var(--cinnabar); }
+  .filter-btn[data-filter="maerkte"].active{ background:var(--cinnabar); color:#fff; border-color:var(--cinnabar); }
   .termin h3{ font-size:16.5px; margin-bottom:4px; }
   .termin p{ font-size:14px; color:var(--text-on-dark-dim); }
   .termin p a{ color:var(--gold); text-decoration:none; border-bottom:1px solid var(--line-strong); }
@@ -218,34 +306,52 @@
     <span class="eyebrow">Wie wir uns treffen</span>
     <h1>Jahresprogramm</h1>
     <p>Unsere monatlichen Gruppentreffen finden regelmäßig am dritten Sonntag im Monat statt.</p>
+
+    <div class="filters" role="group" aria-label="Nach Terminart filtern">
+      <span class="filter-label">Filter</span>
+      <button class="filter-btn active" data-filter="alle">Alle</button>
+      <button class="filter-btn" data-filter="gruppentreffen">Gruppentreffen</button>
+      <button class="filter-btn" data-filter="exkursion">Exkursion</button>
+      <button class="filter-btn" data-filter="maerkte">Märkte und Veranstaltungen</button>
+    </div>
   </div>
 </section>
+
+<div class="filters-fixed" role="group" aria-label="Nach Terminart filtern">
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="alle">Alle</button>
+    <button class="filter-btn" data-filter="gruppentreffen">Gruppentreffen</button>
+    <button class="filter-btn" data-filter="exkursion">Exkursion</button>
+    <button class="filter-btn" data-filter="maerkte">Märkte und Veranstaltungen</button>
+  </div>
+  <span class="filter-label">Filter</span>
+</div>
 
 <main class="wrap">
 
   <h2 class="year-head">2026</h2>
   <div class="termine-list">
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">20.09.2026</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="maerkte">
       <div class="date">27.09.2026</div>
       <div><span class="type">Markt</span><h3>Kunst- und Handwerkermarkt Bernau bei Berlin</h3><p>Die Gruppe präsentiert sich mit einem eigenen Stand.</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">18.10.2026</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">15.11.2026</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="maerkte">
       <div class="date">November 2026</div>
       <div><span class="type">Veranstaltung</span><h3>Hobbyausstellung Altlandsberg</h3><p>Die Gruppe präsentiert sich mit einem eigenen Stand.</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">20.12.2026</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
@@ -253,95 +359,95 @@
 
   <h2 class="year-head">2027</h2>
   <div class="termine-list">
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">17.01.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">21.02.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="exkursion">
       <div class="date">11.03. – 14.03.2027</div>
       <div><span class="type">Mehrtägige Exkursion</span><h3>Internationale Achatbörse Niederwörresbach</h3><p>Ort: Niederwörresbach (bei Idar-Oberstein)</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="exkursion">
       <div class="date">19.03. – 21.03.2027</div>
       <div><span class="type">Mehrtägige Exkursion</span><h3>34. Tauschtag der sächsischen Achatsammler</h3><p>Ort: Zur Jugendherberge 1 a, 08297 Zwönitz, OT Hormersdorf-JH</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">21.03.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">18.04.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="exkursion">
       <div class="date">22.04. – 25.04.2027</div>
       <div><span class="type">Frühjahrsexkursion</span><h3>Urzeithof Stolpe oder Rügen</h3><p>Ort: offen</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">16.05.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="exkursion">
       <div class="date">Mai 2027</div>
       <div><span class="type">Tagesexkursion</span><h3>Kiesgrube Ruhlsdorf</h3><p>Ort: Zerpenschleuser Ch 25, 16348 Marienwerder-Ruhlsdorf</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">20.06.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="maerkte">
       <div class="date">Juni 2027</div>
       <div><span class="type">Veranstaltung</span><h3>Tag der Vereine Eberswalde</h3><p>Die Gruppe präsentiert sich mit einem eigenen Stand.</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">18.07.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="exkursion">
       <div class="date">22.07. – 25.07.2027</div>
       <div><span class="type">Sommerexkursion</span><h3>Russbach Österreich</h3><p>Ort: offen</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">15.08.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="maerkte">
       <div class="date">August 2027</div>
       <div><span class="type">Veranstaltung</span><h3>Tag der Vereine Bernau bei Berlin</h3><p>Die Gruppe präsentiert sich mit einem eigenen Stand.</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">19.09.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="maerkte">
       <div class="date">September 2027</div>
       <div><span class="type">Markt</span><h3>Kunst- und Handwerkermarkt Bernau bei Berlin</h3><p>Die Gruppe präsentiert sich mit einem eigenen Stand.</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="maerkte">
       <div class="date">September 2027</div>
       <div><span class="type">Markt</span><h3>Vogelscheuchenmarkt & Offene Höfe Altlandsberg</h3><p>Die Gruppe präsentiert sich mit einem eigenen Stand.</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="exkursion">
       <div class="date">23.09. – 26.09.2027</div>
       <div><span class="type">Herbstexkursion</span><h3>Harz</h3><p>Ort: offen</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">17.10.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">21.11.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="maerkte">
       <div class="date">November 2027</div>
       <div><span class="type">Veranstaltung</span><h3>Hobbyausstellung Altlandsberg</h3><p>Die Gruppe präsentiert sich mit einem eigenen Stand.</p></div>
     </div>
-    <div class="termin">
+    <div class="termin" data-cat="gruppentreffen">
       <div class="date">12.12.2027</div>
       <div><span class="type">Gruppentreffen</span><h3>Fachvorträge, Fundstücktausch und Erfahrungsaustausch</h3><p>Ort: Treff 23 · Breitscheidstraße 43B · 16321 Bernau · <a href="https://www.google.com/maps/search/?api=1&query=Breitscheidstra%C3%9Fe+43B%2C+16321+Bernau" target="_blank" rel="noopener">Auf Google Maps anzeigen</a></p></div>
     </div>
@@ -420,6 +526,45 @@
         panel.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
       }
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    var filterBtns = document.querySelectorAll('.filter-btn');
+    var termine = document.querySelectorAll('.termin[data-cat]');
+    var filterAnchor = document.querySelector('.filters');
+    var yearBlocks = Array.prototype.slice.call(document.querySelectorAll('.termine-list')).map(function(list){
+      return { heading: list.previousElementSibling, list: list };
+    });
+
+    function updateYearVisibility(){
+      var firstVisibleHeading = null;
+      yearBlocks.forEach(function(block){
+        var hasVisible = block.list.querySelector('.termin:not(.hidden)');
+        var show = !!hasVisible;
+        block.list.classList.toggle('hidden', !show);
+        if(block.heading && block.heading.classList.contains('year-head')){
+          block.heading.classList.toggle('hidden', !show);
+          block.heading.classList.remove('first-visible');
+          if(show && !firstVisibleHeading){ firstVisibleHeading = block.heading; }
+        }
+      });
+      if(firstVisibleHeading){ firstVisibleHeading.classList.add('first-visible'); }
+    }
+
+    filterBtns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var filter = btn.dataset.filter;
+        filterBtns.forEach(function(b){ b.classList.toggle('active', b.dataset.filter === filter); });
+        termine.forEach(function(item){
+          var match = filter === 'alle' || item.dataset.cat === filter;
+          item.classList.toggle('hidden', !match);
+        });
+        updateYearVisibility();
+        if(filterAnchor){ filterAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
     });
   })();
 </script>
